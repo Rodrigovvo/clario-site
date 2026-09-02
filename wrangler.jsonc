@@ -1,0 +1,11 @@
+{
+  // Site estático servido por Workers Static Assets.
+  // Não há script de Worker: só os arquivos de public/.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "clario-site",
+  "compatibility_date": "2026-09-02",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "single-page-application"
+  }
+}

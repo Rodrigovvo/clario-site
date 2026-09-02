@@ -3,33 +3,50 @@
 Página única, sem build e sem dependência externa: um `index.html` que funciona
 em qualquer hospedagem estática.
 
+```
+public/index.html   a página
+wrangler.jsonc      configuração do deploy na Cloudflare
+```
+
 Existe por um motivo concreto: a verificação de negócio da Meta (spec
 [`F0-T01`](../amparo/specs/00-fase0/F0-T01-conta-meta-e-numero.md) do Amparo)
 exige site institucional e e-mail no domínio da empresa.
 
 ## Antes de publicar
 
-1. Preencher no `index.html` os três campos destacados em amarelo — CNPJ,
-   endereço e telefone — com os dados **exatos** do cartão CNPJ. Divergência
-   entre site e documento é a causa mais comum de reprovação.
-2. Remover o bloco `<div class="aviso">` da seção "Dados da empresa".
-3. Conferir se a razão social bate com o cartão CNPJ.
+Os dados do cartão CNPJ já estão preenchidos. Conferir antes de qualquer
+alteração: divergência entre o site e os documentos é a causa mais comum de
+reprovação na verificação de negócio da Meta.
 
-## Publicar no Cloudflare Pages
+## Publicar na Cloudflare
 
-Gratuito, HTTPS automático, e o DNS do domínio fica no mesmo lugar — o que
-facilita a etapa do e-mail.
+O deploy usa **Workers Static Assets** — o caminho atual da Cloudflare para site
+estático, que substituiu o Pages clássico em projetos novos.
 
-1. Criar repositório git com este diretório e enviar para o GitHub.
-2. Em `dash.cloudflare.com` → **Workers & Pages** → **Create** → **Pages** →
-   conectar o repositório.
-3. Build: **nenhum**. Diretório de saída: `/` (raiz).
-4. Em **Custom domains**, adicionar `clariosistemas.com.br` e `www`.
+Em `dash.cloudflare.com` → **Workers & Pages** → **Create** → conectar este
+repositório, com:
+
+| Campo | Valor |
+|---|---|
+| Project name | `clario-site` |
+| Build command | *(vazio — não há build)* |
+| Deploy command | `npx wrangler deploy` |
+
+O `npx wrangler deploy` lê o `wrangler.jsonc`, que aponta para `public/`. Cada
+push na `main` publica sozinho.
+
+Depois, em **Custom domains**, adicionar `clariosistemas.com.br` e `www`.
+
+### Publicar da linha de comando, se preferir
+
+```bash
+npx wrangler deploy
+```
 
 ## Alternativa: GitHub Pages
 
-Repositório → **Settings** → **Pages** → branch `main`, pasta `/root`. Domínio
-personalizado no mesmo lugar. Também gratuito, com HTTPS.
+**Settings** → **Pages** → branch `main`, pasta `/public`. Também gratuito, com
+HTTPS. Não usa o `wrangler.jsonc`.
 
 ## DNS no registro.br
 
