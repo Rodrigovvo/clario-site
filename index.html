@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clariô — Sistemas Inteligentes</title>
+<meta name="description" content="Clariô — Análise e Desenvolvimento de Software. Sistemas para gestão pública, educação e produtos digitais.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230f4c5c'/><text x='16' y='23' font-size='19' font-family='Georgia,serif' fill='%23f2c14e' text-anchor='middle'>C</text></svg>">
+<style>
+  :root{
+    --tinta:#12222a; --tinta-suave:#4a5f68; --papel:#fbfaf7; --papel-alt:#f2efe9;
+    --borda:#e0dbd2; --acento:#0f4c5c; --realce:#f2c14e;
+    --largura:64rem;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --tinta:#e8e6e1; --tinta-suave:#a3b0b6; --papel:#101619; --papel-alt:#161f23;
+           --borda:#26343a; --acento:#7fc4d6; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--papel);color:var(--tinta);
+    font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .env{max-width:var(--largura);margin:0 auto;padding:0 1.5rem}
+  a{color:var(--acento)}
+  h1,h2,h3{line-height:1.2;letter-spacing:-.015em;margin:0}
+  h2{font-size:1.05rem;text-transform:uppercase;letter-spacing:.09em;
+     color:var(--tinta-suave);font-weight:600;margin-bottom:1.75rem}
+
+  header{border-bottom:1px solid var(--borda);background:var(--papel)}
+  .barra{display:flex;align-items:center;justify-content:space-between;
+         padding:1.25rem 0;gap:1rem;flex-wrap:wrap}
+  .marca{display:flex;align-items:baseline;gap:.6rem;font-weight:700;font-size:1.15rem}
+  .marca span{font-weight:400;font-size:.85rem;color:var(--tinta-suave);
+              letter-spacing:.04em}
+  nav{display:flex;gap:1.5rem;font-size:.92rem}
+  nav a{text-decoration:none;color:var(--tinta-suave)}
+  nav a:hover{color:var(--acento)}
+
+  .capa{padding:5rem 0 4.5rem;border-bottom:1px solid var(--borda)}
+  .capa p.linha{max-width:34rem;font-size:1.2rem;color:var(--tinta-suave);
+                margin:1.5rem 0 0}
+  .capa h1{font-size:clamp(2rem,5.5vw,3.1rem);max-width:22ch}
+  .capa h1 em{font-style:normal;color:var(--acento)}
+
+  section{padding:4rem 0;border-bottom:1px solid var(--borda)}
+  .grade{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr))}
+  article{background:var(--papel-alt);border:1px solid var(--borda);
+          border-radius:.6rem;padding:1.6rem}
+  article h3{font-size:1.15rem;margin-bottom:.2rem}
+  article .tag{display:inline-block;font-size:.72rem;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--tinta-suave);border:1px solid var(--borda);
+    border-radius:99px;padding:.15rem .6rem;margin-bottom:.9rem}
+  article p{margin:.6rem 0 0;color:var(--tinta-suave);font-size:.95rem}
+
+  dl{display:grid;grid-template-columns:auto 1fr;gap:.7rem 2rem;margin:0;
+     font-size:.95rem;align-items:baseline}
+  dt{color:var(--tinta-suave)}
+  dd{margin:0}
+
+  footer{padding:2.5rem 0 3.5rem;color:var(--tinta-suave);font-size:.88rem}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="env barra">
+    <div class="marca">Clariô <span>Sistemas Inteligentes</span></div>
+    <nav>
+      <a href="#produtos">Produtos</a>
+      <a href="#empresa">Empresa</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="capa">
+    <div class="env">
+      <h1>Software para quem presta <em>serviço público</em>.</h1>
+      <p class="linha">
+        Desenvolvemos sistemas de gestão para secretarias municipais e
+        produtos digitais para estudo e treinamento.
+      </p>
+    </div>
+  </div>
+
+  <section id="produtos">
+    <div class="env">
+      <h2>Produtos</h2>
+      <div class="grade">
+
+        <article>
+          <span class="tag">Gestão pública</span>
+          <h3>Amparo</h3>
+          <p>
+            Sistema de apoio à gestão de visitas domiciliares que registra
+            informações autodeclaradas pela pessoa idosa e ordena a fila de
+            atendimento da equipe conforme critérios definidos pelo próprio
+            município.
+          </p>
+        </article>
+
+        <article>
+          <span class="tag">Educação</span>
+          <h3>Clariô Concursos</h3>
+          <p>
+            Plataforma de preparação para concursos públicos, com organização
+            de estudo e acompanhamento de desempenho.
+          </p>
+        </article>
+
+        <article>
+          <span class="tag">Treinamento</span>
+          <h3>Personal Chess Coach</h3>
+          <p>
+            Treinamento personalizado de xadrez, com análise de partidas e
+            plano de estudo individual.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="empresa">
+    <div class="env">
+      <h2>Dados da empresa</h2>
+      <dl>
+        <dt>Razão social</dt>
+        <dd>CLARIO - Análise, Desenvolvimento de Software e Consultoria em TI LTDA</dd>
+
+        <dt>Nome fantasia</dt>
+        <dd>Clariô Sistemas Inteligentes</dd>
+
+        <dt>CNPJ</dt>
+        <dd>68.569.828/0001-07</dd>
+
+        <dt>Endereço fiscal</dt>
+        <dd>R. Visconde do Rio Branco, 1488 — Conj. 909, 9º andar<br>Centro — Curitiba/PR — CEP 80.420-210</dd>
+
+        <dt>Telefone</dt>
+        <dd><a href="tel:+5538992000181">(38) 9 2000-0181</a></dd>
+
+        <dt>E-mail</dt>
+        <dd><a href="mailto:contato@clariosistemas.com.br">contato@clariosistemas.com.br</a></dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="env">
+      <h2>Contato</h2>
+      <p style="max-width:38rem;color:var(--tinta-suave);margin:0">
+        Para propostas, parcerias ou informações sobre os produtos, escreva
+        para <a href="mailto:contato@clariosistemas.com.br">contato@clariosistemas.com.br</a>.
+        Respondemos em dias úteis.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="env">
+    © <span id="ano">2026</span> CLARIO - Análise, Desenvolvimento de Software e Consultoria em TI LTDA · CNPJ 68.569.828/0001-07.
+    Todos os direitos reservados.
+  </div>
+</footer>
+
+<script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
+</body>
+</html>

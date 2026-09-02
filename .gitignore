@@ -1,0 +1,11 @@
+# Editor e sistema operacional
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Nada de segredo aqui — este repositório é público por natureza,
+# já que serve um site institucional.
+.env
+.env.*
