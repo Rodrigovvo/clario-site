@@ -24,7 +24,25 @@ O tema escuro não foi inventado: as cores saem do próprio `lockup-dark.svg`,
 inclusive o fundo `#2A2018`, que é a cor da placa do lockup — assim ela
 desaparece no cabeçalho.
 
-Contraste verificado: AAA no tema escuro, AA no claro.
+### Linguagem: técnica sobre tradição
+
+A ideia é instrumento de precisão, não material didático:
+
+- **Mostrador** — o catopê no centro de um mostrador com anéis concêntricos,
+  24 marcas de escala e 12 raios, desenhados por script. A geometria radial do
+  emblema lida como instrumento.
+- **Monoespaçada nos rótulos** — navegação, rótulos de seção, área dos produtos
+  e todos os dados cadastrais. É a voz técnica do sistema.
+- **Baloo 2 só no H1.** As demais chamadas usam Nunito 800 — a arredondada em
+  toda parte puxava o visual para o didático.
+- **Malha de pontos** na capa, cantos vivos, réguas de 1px, cartões numerados.
+
+### Acessibilidade
+
+Contraste conferido par a par. As cores vivas da marca não atingem 4.5:1 em
+fundo claro quando usadas em texto pequeno, então há variantes escurecidas
+(`--verde-txt`, `--rosa-txt`, `--ouro-txt`) só para texto — a cor viva
+permanece na régua lateral dos cartões, onde é elemento gráfico e não texto.
 
 Existe por um motivo concreto: a verificação de negócio da Meta (spec
 [`F0-T01`](../amparo/specs/00-fase0/F0-T01-conta-meta-e-numero.md) do Amparo)
