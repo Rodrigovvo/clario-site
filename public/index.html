@@ -3,68 +3,121 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Clariô — Sistemas Inteligentes</title>
-<meta name="description" content="Clariô — Análise e Desenvolvimento de Software. Sistemas para gestão pública, educação e produtos digitais.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230f4c5c'/><text x='16' y='23' font-size='19' font-family='Georgia,serif' fill='%23f2c14e' text-anchor='middle'>C</text></svg>">
+<title>Clariô Sistemas Inteligentes</title>
+<meta name="description" content="Clariô Sistemas Inteligentes — desenvolvimento de software: produtos próprios e sistemas sob encomenda. Curitiba/PR e Montes Claros/MG.">
+<link rel="icon" href="/marca/catope.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --tinta:#12222a; --tinta-suave:#4a5f68; --papel:#fbfaf7; --papel-alt:#f2efe9;
-    --borda:#e0dbd2; --acento:#0f4c5c; --realce:#f2c14e;
-    --largura:64rem;
+/* ── Tokens da marca ───────────────────────────────────────── */
+:root{
+  --vermelho:#A93B30; --ouro:#E3A22B; --ouro-escuro:#C8811C;
+  --rosa:#C56F7F; --azul:#3F6E8C; --verde:#5E9086;
+  --tinta:#33261C; --creme:#ECDCB4; --papel:#F7F3E9; --branco:#fff;
+
+  --texto:var(--tinta); --suave:#6E6656;
+  --fundo:var(--papel); --superficie:var(--branco); --borda:#E3DCC8;
+  --titulo:var(--vermelho); --destaque:var(--ouro); --link:var(--azul);
+
+  --display:'Baloo 2',system-ui,sans-serif;
+  --corpo:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,monospace;
+
+  --r-sm:8px; --r-md:14px; --r-lg:22px;
+  --sombra:0 1px 2px rgba(51,38,28,.06), 0 6px 20px rgba(51,38,28,.06);
+  --largura:68rem;
+}
+/* Tema escuro: cores tiradas do próprio lockup escuro da marca.
+   --fundo é o #2A2018 da placa do lockup, para ela desaparecer. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --texto:#F0E6D2; --suave:#C9BFA8;
+    --fundo:#2A2018; --superficie:#352A20; --borda:#4A3C2E;
+    --titulo:var(--ouro); --link:#8FB8CE;
   }
-  @media (prefers-color-scheme: dark){
-    :root{ --tinta:#e8e6e1; --tinta-suave:#a3b0b6; --papel:#101619; --papel-alt:#161f23;
-           --borda:#26343a; --acento:#7fc4d6; }
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--papel);color:var(--tinta);
-    font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    -webkit-font-smoothing:antialiased}
-  .env{max-width:var(--largura);margin:0 auto;padding:0 1.5rem}
-  a{color:var(--acento)}
-  h1,h2,h3{line-height:1.2;letter-spacing:-.015em;margin:0}
-  h2{font-size:1.05rem;text-transform:uppercase;letter-spacing:.09em;
-     color:var(--tinta-suave);font-weight:600;margin-bottom:1.75rem}
+}
+:root[data-theme="dark"]{
+  --texto:#F0E6D2; --suave:#C9BFA8;
+  --fundo:#2A2018; --superficie:#352A20; --borda:#4A3C2E;
+  --titulo:var(--ouro); --link:#8FB8CE;
+}
 
-  header{border-bottom:1px solid var(--borda);background:var(--papel)}
-  .barra{display:flex;align-items:center;justify-content:space-between;
-         padding:1.25rem 0;gap:1rem;flex-wrap:wrap}
-  .marca{display:flex;align-items:baseline;gap:.6rem;font-weight:700;font-size:1.15rem}
-  .marca span{font-weight:400;font-size:.85rem;color:var(--tinta-suave);
-              letter-spacing:.04em}
-  nav{display:flex;gap:1.5rem;font-size:.92rem}
-  nav a{text-decoration:none;color:var(--tinta-suave)}
-  nav a:hover{color:var(--acento)}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--fundo); color:var(--texto);
+  font-family:var(--corpo); font-size:17px; line-height:1.65;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+h1,h2,h3{font-family:var(--display); line-height:1.12; margin:0; font-weight:600}
+a{color:var(--link); text-decoration-thickness:1.5px; text-underline-offset:.18em}
+.env{max-width:var(--largura); margin:0 auto; padding:0 1.5rem}
 
-  .capa{padding:5rem 0 4.5rem;border-bottom:1px solid var(--borda)}
-  .capa p.linha{max-width:34rem;font-size:1.2rem;color:var(--tinta-suave);
-                margin:1.5rem 0 0}
-  .capa h1{font-size:clamp(2rem,5.5vw,3.1rem);max-width:22ch}
-  .capa h1 em{font-style:normal;color:var(--acento)}
+/* ── Cabeçalho ─────────────────────────────────────────────── */
+header{border-bottom:1px solid var(--borda); background:var(--fundo)}
+.barra{display:flex; align-items:center; justify-content:space-between;
+       gap:1rem; padding:1.1rem 0; flex-wrap:wrap}
+.lockup{display:block; width:179px; height:66px; /* 850x314 do SVG */
+        background:url("/marca/lockup.svg") left center/contain no-repeat}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .lockup{background-image:url("/marca/lockup-dark.svg")}
+}
+:root[data-theme="dark"] .lockup{background-image:url("/marca/lockup-dark.svg")}
+@media (max-width:520px){ .lockup{width:146px; height:54px} }
+.oculto{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+nav{display:flex; gap:1.6rem; font-weight:600; font-size:.95rem}
+nav a{color:var(--suave); text-decoration:none}
+nav a:hover{color:var(--titulo)}
 
-  section{padding:4rem 0;border-bottom:1px solid var(--borda)}
-  .grade{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr))}
-  article{background:var(--papel-alt);border:1px solid var(--borda);
-          border-radius:.6rem;padding:1.6rem}
-  article h3{font-size:1.15rem;margin-bottom:.2rem}
-  article .tag{display:inline-block;font-size:.72rem;letter-spacing:.07em;
-    text-transform:uppercase;color:var(--tinta-suave);border:1px solid var(--borda);
-    border-radius:99px;padding:.15rem .6rem;margin-bottom:.9rem}
-  article p{margin:.6rem 0 0;color:var(--tinta-suave);font-size:.95rem}
+/* ── Capa ──────────────────────────────────────────────────── */
+.capa{position:relative; overflow:hidden; border-bottom:1px solid var(--borda)}
+.capa .env{position:relative; z-index:1; padding-top:5.5rem; padding-bottom:5rem}
+.capa h1{font-size:clamp(2.1rem,5.2vw,3.4rem); color:var(--titulo); max-width:17ch;
+         font-weight:700; letter-spacing:-.01em}
+.capa p{max-width:36rem; font-size:1.18rem; color:var(--suave); margin:1.4rem 0 0}
+.emblema{position:absolute; right:-7rem; top:50%; transform:translateY(-50%);
+         width:30rem; opacity:.13; pointer-events:none; z-index:0}
+@media (max-width:900px){ .emblema{right:-13rem; width:24rem; opacity:.08} }
 
-  dl{display:grid;grid-template-columns:auto 1fr;gap:.7rem 2rem;margin:0;
-     font-size:.95rem;align-items:baseline}
-  dt{color:var(--tinta-suave)}
-  dd{margin:0}
+/* ── Seções ────────────────────────────────────────────────── */
+section{padding:4.5rem 0; border-bottom:1px solid var(--borda)}
+h2{font-size:1.75rem; color:var(--titulo); margin-bottom:.5rem}
+.legenda{color:var(--suave); max-width:44rem; margin:0 0 2.5rem}
 
-  footer{padding:2.5rem 0 3.5rem;color:var(--tinta-suave);font-size:.88rem}
+.grade{display:grid; gap:1.4rem; grid-template-columns:repeat(auto-fit,minmax(17rem,1fr))}
+article{
+  background:var(--superficie); border:1px solid var(--borda);
+  border-radius:var(--r-lg); padding:1.8rem; box-shadow:var(--sombra);
+  border-top:4px solid var(--cor,var(--ouro));
+}
+article h3{font-size:1.3rem; margin-bottom:.15rem; color:var(--texto)}
+article .tag{display:inline-block; font-family:var(--corpo); font-weight:700;
+  font-size:.7rem; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--branco); background:var(--cor,var(--ouro));
+  border-radius:999px; padding:.22rem .7rem; margin-bottom:1rem}
+article p{margin:.7rem 0 0; color:var(--suave); font-size:.97rem}
+article .liga{display:inline-block; margin-top:1rem; font-weight:700; font-size:.92rem}
+
+/* ── Dados ─────────────────────────────────────────────────── */
+dl{display:grid; grid-template-columns:auto 1fr; gap:.85rem 2.5rem; margin:0;
+   align-items:baseline}
+dt{color:var(--suave); font-weight:600; font-size:.92rem}
+dd{margin:0}
+.num{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:.95rem}
+@media (max-width:620px){ dl{grid-template-columns:1fr; gap:.2rem 0} dd{margin-bottom:.9rem} }
+
+footer{padding:2.6rem 0 3.6rem; color:var(--suave); font-size:.88rem}
+footer .num{font-size:.85rem}
 </style>
 </head>
 <body>
 
 <header>
   <div class="env barra">
-    <div class="marca">Clariô <span>Sistemas Inteligentes</span></div>
+    <a href="/" aria-label="Clariô Sistemas Inteligentes">
+      <span class="lockup" role="img" aria-label="Clariô Sistemas Inteligentes"></span>
+      <span class="oculto">Clariô Sistemas Inteligentes</span>
+    </a>
     <nav>
       <a href="#produtos">Produtos</a>
       <a href="#empresa">Empresa</a>
@@ -75,47 +128,65 @@
 
 <main>
   <div class="capa">
+    <img class="emblema" src="/marca/catope.svg" alt="" aria-hidden="true">
     <div class="env">
-      <h1>Software para quem presta <em>serviço público</em>.</h1>
-      <p class="linha">
-        Desenvolvemos sistemas de gestão para secretarias municipais e
-        produtos digitais para estudo e treinamento.
+      <h1>Sistemas inteligentes para problemas reais.</h1>
+      <p>
+        Desenvolvemos produtos próprios e software sob encomenda. Cada projeto
+        nasce de um problema concreto de quem vai usar — e é assim que a gente
+        gosta de trabalhar.
       </p>
     </div>
   </div>
 
   <section id="produtos">
     <div class="env">
-      <h2>Produtos</h2>
+      <h2>O que fazemos</h2>
+      <p class="legenda">
+        Três produtos próprios, em áreas bem diferentes, e desenvolvimento sob
+        encomenda para quem precisa de algo que ainda não existe.
+      </p>
+
       <div class="grade">
 
-        <article>
-          <span class="tag">Gestão pública</span>
+        <article style="--cor:var(--azul)">
+          <span class="tag">Xadrez</span>
+          <h3>PersonalChess</h3>
+          <p>
+            Treinamento personalizado de xadrez, com análise de partidas e plano
+            de estudo individual, adaptado ao nível de cada jogador.
+          </p>
+          <a class="liga" href="https://personalchess.com">personalchess.com&nbsp;→</a>
+        </article>
+
+        <article style="--cor:var(--verde)">
+          <span class="tag">Educação</span>
+          <h3>Clariô Concursos</h3>
+          <p>
+            Plataforma de preparação para concursos públicos, com organização de
+            estudo e acompanhamento de desempenho ao longo do edital.
+          </p>
+          <a class="liga" href="https://clarioconcursos.com.br">clarioconcursos.com.br&nbsp;→</a>
+        </article>
+
+        <article style="--cor:var(--rosa)">
+          <span class="tag">Saúde e gestão</span>
           <h3>Amparo</h3>
           <p>
             Sistema de apoio à gestão de visitas domiciliares que registra
             informações autodeclaradas pela pessoa idosa e ordena a fila de
-            atendimento da equipe conforme critérios definidos pelo próprio
-            município.
+            atendimento da equipe conforme critérios definidos pelo município.
           </p>
         </article>
 
-        <article>
-          <span class="tag">Educação</span>
-          <h3>Clariô Concursos</h3>
+        <article style="--cor:var(--ouro-escuro)">
+          <span class="tag">Sob encomenda</span>
+          <h3>Software sob medida</h3>
           <p>
-            Plataforma de preparação para concursos públicos, com organização
-            de estudo e acompanhamento de desempenho.
+            Desenvolvimento de sistemas, integrações, tratamento de dados e
+            consultoria em tecnologia. Do levantamento ao que entra em produção.
           </p>
-        </article>
-
-        <article>
-          <span class="tag">Treinamento</span>
-          <h3>Personal Chess Coach</h3>
-          <p>
-            Treinamento personalizado de xadrez, com análise de partidas e
-            plano de estudo individual.
-          </p>
+          <a class="liga" href="#contato">Falar com a gente&nbsp;→</a>
         </article>
 
       </div>
@@ -124,7 +195,11 @@
 
   <section id="empresa">
     <div class="env">
-      <h2>Dados da empresa</h2>
+      <h2>A empresa</h2>
+      <p class="legenda">
+        Sociedade empresária limitada, ativa e regular. Sede fiscal em Curitiba;
+        a operação fica em Montes Claros, no norte de Minas.
+      </p>
       <dl>
         <dt>Razão social</dt>
         <dd>CLARIO - Análise, Desenvolvimento de Software e Consultoria em TI LTDA</dd>
@@ -133,13 +208,14 @@
         <dd>Clariô Sistemas Inteligentes</dd>
 
         <dt>CNPJ</dt>
-        <dd>68.569.828/0001-07</dd>
+        <dd class="num">68.569.828/0001-07</dd>
 
         <dt>Endereço fiscal</dt>
-        <dd>R. Visconde do Rio Branco, 1488 — Conj. 909, 9º andar<br>Centro — Curitiba/PR — CEP 80.420-210</dd>
+        <dd>R. Visconde do Rio Branco, 1488 — Conj. 909, 9º andar<br>
+            Centro — Curitiba/PR — CEP 80.420-210</dd>
 
         <dt>Telefone</dt>
-        <dd><a href="tel:+5538992000181">(38) 9 2000-0181</a></dd>
+        <dd class="num"><a href="tel:+5538992000181">(38) 9 2000-0181</a></dd>
 
         <dt>E-mail</dt>
         <dd><a href="mailto:contato@clariosistemas.com.br">contato@clariosistemas.com.br</a></dd>
@@ -150,9 +226,10 @@
   <section id="contato">
     <div class="env">
       <h2>Contato</h2>
-      <p style="max-width:38rem;color:var(--tinta-suave);margin:0">
-        Para propostas, parcerias ou informações sobre os produtos, escreva
-        para <a href="mailto:contato@clariosistemas.com.br">contato@clariosistemas.com.br</a>.
+      <p class="legenda" style="margin-bottom:0">
+        Para projetos, parcerias ou dúvidas sobre os produtos, escreva para
+        <a href="mailto:contato@clariosistemas.com.br">contato@clariosistemas.com.br</a>
+        ou chame no <a href="tel:+5538992000181">(38) 9 2000-0181</a>.
         Respondemos em dias úteis.
       </p>
     </div>
@@ -161,8 +238,8 @@
 
 <footer>
   <div class="env">
-    © <span id="ano">2026</span> CLARIO - Análise, Desenvolvimento de Software e Consultoria em TI LTDA · CNPJ 68.569.828/0001-07.
-    Todos os direitos reservados.
+    © <span id="ano">2026</span> CLARIO - Análise, Desenvolvimento de Software e
+    Consultoria em TI LTDA · <span class="num">CNPJ 68.569.828/0001-07</span>
   </div>
 </footer>
 

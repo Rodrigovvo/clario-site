@@ -1,0 +1,107 @@
+/* ============================================================
+   Clariô Sistemas Inteligentes — tokens de marca
+   Cole em src/styles/brand.css e importe no topo do app
+   (ex.: import "./styles/brand.css" no main.tsx).
+   Fontes: SIL Open Font License (uso comercial livre).
+   ============================================================ */
+
+/* --- Fontes (Google Fonts) --------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* --- Paleta da marca (cores da Festa de Agosto) ---------- */
+  --clr-vermelho:      #A93B30;  /* Divino Espírito Santo — cor primária */
+  --clr-ouro:          #E3A22B;  /* Sol / luz — cor de destaque (accent) */
+  --clr-ouro-escuro:   #C8811C;
+  --clr-rosa:          #C56F7F;  /* São Benedito */
+  --clr-azul:          #3F6E8C;  /* Nossa Senhora do Rosário */
+  --clr-verde:         #5E9086;  /* pena de pavão */
+  --clr-tinta:         #33261C;  /* texto */
+  --clr-creme:         #ECDCB4;  /* fundo do emblema */
+  --clr-papel:         #F7F3E9;  /* fundo claro da interface */
+  --clr-branco:        #FFFFFF;
+
+  /* --- Aliases semânticos (use estes na UI) --------------- */
+  --color-primary:     var(--clr-vermelho);
+  --color-accent:      var(--clr-ouro);
+  --color-text:        var(--clr-tinta);
+  --color-muted:       #6E6656;
+  --color-bg:          var(--clr-papel);
+  --color-surface:     var(--clr-branco);
+  --color-border:      #E3DCC8;
+  --color-link:        var(--clr-azul);
+  --color-success:     var(--clr-verde);
+  --color-danger:      var(--clr-vermelho);
+
+  /* --- Tipografia ----------------------------------------- */
+  --font-display: 'Baloo 2', system-ui, sans-serif;                         /* títulos, chamadas */
+  --font-body:    'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;/* texto e interface */
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;/* dados, números, código */
+
+  /* pesos de referência */
+  --fw-regular: 400;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* --- Raios / sombras (opcional, harmonizam com o arredondado) */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow-sm: 0 1px 2px rgba(51, 38, 28, .08);
+  --shadow-md: 0 6px 20px rgba(51, 38, 28, .12);
+}
+
+/* --- Estilos base ------------------------------------------ */
+body {
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+  line-height: 1.15;
+}
+h1 { color: var(--color-primary); }
+
+a { color: var(--color-link); text-decoration-thickness: 1.5px; }
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+/* Números tabulares (valores, CNIS, benefícios) alinhados em colunas */
+.tabular-nums,
+table td.num,
+.valor {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Exemplos de uso (remova se não precisar) -------------- */
+.btn-primary {
+  font-family: var(--font-body);
+  font-weight: var(--fw-bold);
+  color: var(--clr-branco);
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.7em 1.2em;
+  cursor: pointer;
+}
+.btn-primary:hover { filter: brightness(0.94); }
+
+.badge-accent {
+  font-family: var(--font-body);
+  font-weight: var(--fw-semibold);
+  color: var(--clr-tinta);
+  background: var(--clr-ouro);
+  border-radius: 999px;
+  padding: 0.2em 0.7em;
+}

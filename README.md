@@ -4,9 +4,27 @@ Página única, sem build e sem dependência externa: um `index.html` que funcio
 em qualquer hospedagem estática.
 
 ```
-public/index.html   a página
-wrangler.jsonc      configuração do deploy na Cloudflare
+public/index.html     a página
+public/marca/         ativos da identidade visual
+wrangler.jsonc        configuração do deploy na Cloudflare
 ```
+
+## Identidade visual
+
+Vem do sistema de marca da Clariô, em `~/Documentos/Clariô`:
+
+- **Paleta** das cores da Festa de Agosto — vermelho `#A93B30` (Divino),
+  ouro `#E3A22B` (sol), rosa `#C56F7F` (São Benedito), azul `#3F6E8C`
+  (N. S. do Rosário), verde `#5E9086` (pena de pavão)
+- **Tipografia**: Baloo 2 nos títulos, Nunito no texto, JetBrains Mono nos
+  dados (CNPJ, telefone) — todas SIL Open Font License
+- **Emblema do catopê** como marca d'água da capa
+
+O tema escuro não foi inventado: as cores saem do próprio `lockup-dark.svg`,
+inclusive o fundo `#2A2018`, que é a cor da placa do lockup — assim ela
+desaparece no cabeçalho.
+
+Contraste verificado: AAA no tema escuro, AA no claro.
 
 Existe por um motivo concreto: a verificação de negócio da Meta (spec
 [`F0-T01`](../amparo/specs/00-fase0/F0-T01-conta-meta-e-numero.md) do Amparo)
