@@ -91,7 +91,7 @@ for folder in ["public", "content"]:
         continue
     for root, _, files in os.walk(folder):
         for file in files:
-            if file.endswith((".html", ".md", ".css", ".js", ".txt")):
+            if file.endswith((".html", ".md", ".css", ".js", ".txt")) or file == "_headers":
                 check_text_rules(os.path.join(root, file))
 
 # 2. Verificacao de tracking do Umami
@@ -115,7 +115,11 @@ required_files = [
     "public/robots.txt",
     "public/favicon.ico",
     "public/apple-touch-icon.png",
-    "public/bcfc4849079645379c75ca0288a62c1e.txt"
+    "public/bcfc4849079645379c75ca0288a62c1e.txt",
+    "public/_headers",
+    "public/fonts/baloo2-latin.woff2",
+    "public/fonts/nunito-latin.woff2",
+    "public/fonts/jetbrainsmono-latin.woff2"
 ]
 for rf in required_files:
     if not os.path.isfile(rf):
