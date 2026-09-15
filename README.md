@@ -1,4 +1,4 @@
-# Site institucional — Clariô
+# Site institucional: Clariô
 
 Página única, sem build e sem dependência externa: um `index.html` que funciona
 em qualquer hospedagem estática.
@@ -13,6 +13,7 @@ public/bcfc4849079645379c75ca0288a62c1e.txt chave de verificação do IndexNow (
 public/marca/                               ativos da identidade visual
 scripts/build_blog.py                       gerador do blog, agendamento e sitemap
 scripts/indexnow.sh                         script para submissão ao IndexNow
+scripts/publicar.sh                         script de validação, commit, push e deploy
 wrangler.jsonc                              configuração do deploy na Cloudflare
 ```
 
@@ -20,35 +21,35 @@ wrangler.jsonc                              configuração do deploy na Cloudfla
 
 Vem do sistema de marca da Clariô, em `~/Documentos/Clariô`:
 
-- **Paleta** das cores da Festa de Agosto — vermelho `#A93B30` (Divino),
+- **Paleta** das cores da Festa de Agosto: vermelho `#A93B30` (Divino),
   ouro `#E3A22B` (sol), rosa `#C56F7F` (São Benedito), azul `#3F6E8C`
   (N. S. do Rosário), verde `#5E9086` (pena de pavão)
 - **Tipografia**: Baloo 2 nos títulos, Nunito no texto, JetBrains Mono nos
-  dados (CNPJ, telefone) — todas SIL Open Font License
+  dados (CNPJ, telefone), todas SIL Open Font License
 - **Emblema do catopê** como marca d'água da capa
 
 O tema escuro não foi inventado: as cores saem do próprio `lockup-dark.svg`,
-inclusive o fundo `#2A2018`, que é a cor da placa do lockup — assim ela
-desaparece no cabeçalho.
+inclusive o fundo `#2A2018`, que é a cor da placa do lockup (assim ela
+desaparece no cabeçalho).
 
 ### Linguagem: técnica sobre tradição
 
 A ideia é instrumento de precisão, não material didático:
 
-- **Mostrador** — o catopê no centro de um mostrador com anéis concêntricos,
+- **Mostrador**: o catopê no centro de um mostrador com anéis concêntricos,
   24 marcas de escala e 12 raios, desenhados por script. A geometria radial do
   emblema lida como instrumento.
-- **Monoespaçada nos rótulos** — navegação, rótulos de seção, área dos produtos
+- **Monoespaçada nos rótulos**: navegação, rótulos de seção, área dos produtos
   e todos os dados cadastrais. É a voz técnica do sistema.
-- **Baloo 2 só no H1.** As demais chamadas usam Nunito 800 — a arredondada em
-  toda parte puxava o visual para o didático.
+- **Baloo 2 só no H1.** As demais chamadas usam Nunito 800 (a arredondada em
+  toda parte puxava o visual para o didático).
 - **Malha de pontos** na capa, cantos vivos, réguas de 1px, cartões numerados.
 
 ### Acessibilidade
 
 Contraste conferido par a par. As cores vivas da marca não atingem 4.5:1 em
 fundo claro quando usadas em texto pequeno, então há variantes escurecidas
-(`--verde-txt`, `--rosa-txt`, `--ouro-txt`) só para texto — a cor viva
+(`--verde-txt`, `--rosa-txt`, `--ouro-txt`) só para texto: a cor viva
 permanece na régua lateral dos cartões, onde é elemento gráfico e não texto.
 
 Existe por um motivo concreto: a verificação de negócio da Meta (spec
@@ -63,7 +64,7 @@ reprovação na verificação de negócio da Meta.
 
 ## Publicar na Cloudflare
 
-O deploy usa **Workers Static Assets** — o caminho atual da Cloudflare para site
+O deploy usa **Workers Static Assets**: o caminho atual da Cloudflare para site
 estático, que substituiu o Pages clássico em projetos novos.
 
 Em `dash.cloudflare.com` → **Workers & Pages** → **Create** → conectar este
@@ -72,7 +73,7 @@ repositório, com:
 | Campo | Valor |
 |---|---|
 | Project name | `clario-site` |
-| Build command | *(vazio — não há build)* |
+| Build command | *(vazio: não há build)* |
 | Deploy command | `npx wrangler deploy` |
 
 O `npx wrangler deploy` lê o `wrangler.jsonc`, que aponta para `public/`. Cada
@@ -80,7 +81,19 @@ push na `main` publica sozinho.
 
 Depois, em **Custom domains**, adicionar `clariosistemas.com.br` e `www`.
 
-### Publicar da linha de comando, se preferir
+### Script automatizado de publicação
+
+Para verificar o código, atualizar o blog, auditar conformidade, commitar, enviar para produção e acionar o IndexNow em um único comando:
+
+```bash
+./scripts/publicar.sh "Descrição concisa da alteração"
+```
+
+Opções disponíveis:
+- `./scripts/publicar.sh --check-only`: executa as validações e auditorias sem commitar ou enviar ao repositório remoto.
+- `./scripts/publicar.sh --no-indexnow "Mensagem"`: publica em produção sem enviar ping ao IndexNow.
+
+### Publicar diretamente via Wrangler (se configurado)
 
 ```bash
 npx wrangler deploy
@@ -137,7 +150,7 @@ Depois de registrar `clariosistemas.com.br`, aponte os servidores DNS para os
 da Cloudflare (o painel deles informa quais). A partir daí, site e e-mail são
 configurados pela Cloudflare, não pelo registro.br.
 
-## E-mail — Zoho Mail (plano gratuito)
+## E-mail: Zoho Mail (plano gratuito)
 
 O e-mail no domínio é o que a Meta usa para confirmar a titularidade.
 
