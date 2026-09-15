@@ -1,5 +1,5 @@
 /* ============================================================
-   Clariô Sistemas Inteligentes — tokens de marca
+   Clariô Sistemas Inteligentes: tokens de marca
    Cole em src/styles/brand.css e importe no topo do app
    (ex.: import "./styles/brand.css" no main.tsx).
    Fontes: SIL Open Font License (uso comercial livre).
@@ -10,8 +10,8 @@
 
 :root {
   /* --- Paleta da marca (cores da Festa de Agosto) ---------- */
-  --clr-vermelho:      #A93B30;  /* Divino Espírito Santo — cor primária */
-  --clr-ouro:          #E3A22B;  /* Sol / luz — cor de destaque (accent) */
+  --clr-vermelho:      #A93B30;  /* Divino Espírito Santo: cor primária */
+  --clr-ouro:          #E3A22B;  /* Sol / luz: cor de destaque (accent) */
   --clr-ouro-escuro:   #C8811C;
   --clr-rosa:          #C56F7F;  /* São Benedito */
   --clr-azul:          #3F6E8C;  /* Nossa Senhora do Rosário */

@@ -57,6 +57,7 @@ SHARED_HEAD = """
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/marca/catope.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="7dbc2ed6-92e3-4324-8a5d-e9a11250e975"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
