@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Clariô Sistemas Inteligentes</title>
 <meta name="description" content="Clariô Sistemas Inteligentes — desenvolvimento de software: produtos próprios e sistemas sob encomenda. Curitiba/PR e Montes Claros/MG.">
+<link rel="canonical" href="https://clariosistemas.com.br/">
 <link rel="icon" href="/marca/catope.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +18,7 @@
 
   --texto:var(--tinta); --suave:#6E6656; --tenue:#7B7263;
   /* variantes para texto pequeno: as cores vivas não atingem 4.5:1 em fundo claro */
-  --azul-txt:#3F6E8C; --verde-txt:#517C73; --rosa-txt:#A75E6C; --ouro-txt:#A06716;
+  --azul-txt:#3F6E8C; --verde-txt:#517C73; --rosa-txt:#A75E6C; --ouro-txt:#A06716; --vermelho-txt:#A93B30;
   --fundo:#FCFBF7; --superficie:#fff; --faixa:var(--papel);
   --linha:#E6DFCE; --linha-forte:#D6CDB6;
   --titulo:var(--tinta); --marca:var(--vermelho); --link:var(--azul);
@@ -30,7 +31,7 @@
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --texto:#F0E6D2; --suave:#C9BFA8; --tenue:#A2957E;
-    --azul-txt:#8FB8CE; --verde-txt:#8FBBB0; --rosa-txt:#E0A0AC; --ouro-txt:#E3A22B;
+    --azul-txt:#8FB8CE; --verde-txt:#8FBBB0; --rosa-txt:#E0A0AC; --ouro-txt:#E3A22B; --vermelho-txt:#E58278;
     --fundo:#2A2018; --superficie:#342A20; --faixa:#241C15;
     --linha:#453729; --linha-forte:#584937;
     --titulo:#F0E6D2; --marca:var(--ouro); --link:#8FB8CE;
@@ -38,7 +39,7 @@
 }
 :root[data-theme="dark"]{
   --texto:#F0E6D2; --suave:#C9BFA8; --tenue:#A2957E;
-  --azul-txt:#8FB8CE; --verde-txt:#8FBBB0; --rosa-txt:#E0A0AC; --ouro-txt:#E3A22B;
+  --azul-txt:#8FB8CE; --verde-txt:#8FBBB0; --rosa-txt:#E0A0AC; --ouro-txt:#E3A22B; --vermelho-txt:#E58278;
   --fundo:#2A2018; --superficie:#342A20; --faixa:#241C15;
   --linha:#453729; --linha-forte:#584937;
   --titulo:#F0E6D2; --marca:var(--ouro); --link:#8FB8CE;
@@ -200,7 +201,7 @@ footer{padding:2.4rem 0 3.4rem; color:var(--tenue); font-size:.82rem;
         <h2>O que fazemos</h2>
       </div>
       <p class="legenda">
-        Três produtos próprios, em áreas deliberadamente distintas, e
+        Quatro produtos próprios, em áreas deliberadamente distintas, e
         desenvolvimento sob encomenda para quem precisa de algo que ainda não
         existe.
       </p>
@@ -233,8 +234,17 @@ footer{padding:2.4rem 0 3.4rem; color:var(--tenue); font-size:.82rem;
              conforme critérios definidos pelo município.</p>
         </article>
 
-        <article style="--cor:var(--ouro-escuro); --cor-txt:var(--ouro-txt)">
+        <article style="--cor:var(--vermelho); --cor-txt:var(--vermelho-txt)">
           <div class="idx">04</div>
+          <h3>Pri.Kland</h3>
+          <div class="area">Entretenimento</div>
+          <p>Portal da criadora Priscila Alkimim sobre K-dramas e entretenimento
+             asiático, com artigos, dados de audiência e parcerias com marcas.</p>
+          <a class="liga" href="https://www.prikland.com.br">prikland.com.br&nbsp;↗</a>
+        </article>
+
+        <article style="--cor:var(--ouro-escuro); --cor-txt:var(--ouro-txt)">
+          <div class="idx">05</div>
           <h3>Software sob medida</h3>
           <div class="area">Sob encomenda</div>
           <p>Sistemas, integrações, tratamento de dados e consultoria em

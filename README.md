@@ -4,9 +4,13 @@ Página única, sem build e sem dependência externa: um `index.html` que funcio
 em qualquer hospedagem estática.
 
 ```
-public/index.html     a página
-public/marca/         ativos da identidade visual
-wrangler.jsonc        configuração do deploy na Cloudflare
+public/index.html                           a página
+public/sitemap.xml                          mapa do site para indexação (SEO)
+public/robots.txt                           diretivas para rastreadores e ponteiro do sitemap
+public/bcfc4849079645379c75ca0288a62c1e.txt chave de verificação do IndexNow (Bing)
+public/marca/                               ativos da identidade visual
+scripts/indexnow.sh                         script para submissão ao IndexNow
+wrangler.jsonc                              configuração do deploy na Cloudflare
 ```
 
 ## Identidade visual
@@ -78,6 +82,21 @@ Depois, em **Custom domains**, adicionar `clariosistemas.com.br` e `www`.
 ```bash
 npx wrangler deploy
 ```
+
+## IndexNow (Bing e outros buscadores)
+
+O protocolo [IndexNow](https://www.indexnow.org) avisa imediatamente motores de busca (Bing, Yandex, Seznam, Naver) sobre atualizações nas URLs do site sem esperar a próxima varredura.
+
+1. **Chave de API**: O arquivo `public/bcfc4849079645379c75ca0288a62c1e.txt` é servido na raiz do domínio (`https://clariosistemas.com.br/bcfc4849079645379c75ca0288a62c1e.txt`) para validar a titularidade.
+2. **Submissão manual**: Após publicar as alterações, execute:
+   ```bash
+   ./scripts/indexnow.sh
+   ```
+   Ou envie uma URL específica:
+   ```bash
+   ./scripts/indexnow.sh https://clariosistemas.com.br/
+   ```
+3. **Automação no Cloudflare (opcional)**: No painel da Cloudflare (`dash.cloudflare.com` → domínio `clariosistemas.com.br` → **Speed** ou **Crawlers / SEO**), é possível habilitar a opção nativa de **IndexNow** para que a própria Cloudflare notifique os indexadores automaticamente ao purgar cache.
 
 ## Alternativa: GitHub Pages
 

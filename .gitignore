@@ -9,3 +9,9 @@ Thumbs.db
 # já que serve um site institucional.
 .env
 .env.*
+
+*/.AGENTS/
+./.AGENTS/*
+.AGENTS/
+.AGENTS/*
+.AGENTS
