@@ -109,10 +109,16 @@ section{padding:4.5rem 0; border-bottom:1px solid var(--linha)}
   letter-spacing:-.01em; color:var(--titulo)}
 .legenda{color:var(--suave); max-width:46rem; margin:0 0 2.6rem; font-size:1.02rem}
 
-.grade{display:grid; gap:0; grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));
+.grade{display:grid; gap:0; grid-template-columns:repeat(4,1fr);
   border:1px solid var(--linha); border-radius:6px; overflow:hidden;
   background:var(--superficie)}
-article{padding:1.9rem 1.7rem; border-right:1px solid var(--linha);
+@media (max-width:960px){
+  .grade{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:540px){
+  .grade{grid-template-columns:1fr}
+}
+article{padding:1.8rem 1.4rem; border-right:1px solid var(--linha);
   border-bottom:1px solid var(--linha); position:relative}
 article::before{content:""; position:absolute; left:0; top:0; width:3px;
   height:100%; background:var(--cor)}
@@ -125,6 +131,24 @@ article .area{font-family:var(--mono); font-size:.68rem; letter-spacing:.12em;
 article p{margin:.85rem 0 0; color:var(--suave); font-size:.94rem; line-height:1.6}
 article .liga{display:inline-block; margin-top:1.1rem; font-family:var(--mono);
   font-size:.78rem; font-weight:500; letter-spacing:.02em}
+
+/* ── Sob encomenda ────────────────────────────────────────── */
+.encomenda{margin-top:1.3rem; border:1px solid var(--linha); border-radius:6px;
+  background:var(--superficie); padding:1.7rem 1.8rem; position:relative;
+  display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap}
+.encomenda::before{content:""; position:absolute; left:0; top:0; width:3px;
+  height:100%; background:var(--cor)}
+.encomenda .info{max-width:44rem}
+.encomenda .idx{font-family:var(--mono); font-size:.72rem; color:var(--cor-txt);
+  font-weight:600; letter-spacing:.1em; text-transform:uppercase}
+.encomenda h3{font-family:var(--corpo); font-weight:800; font-size:1.24rem;
+  margin:.35rem 0 .2rem; color:var(--titulo)}
+.encomenda p{margin:0; color:var(--suave); font-size:.96rem; line-height:1.6}
+.encomenda .liga{display:inline-flex; align-items:center; font-family:var(--mono);
+  font-size:.82rem; font-weight:600; letter-spacing:.02em; padding:.55rem 1.15rem;
+  border:1px solid var(--linha-forte); border-radius:4px; background:var(--fundo);
+  color:var(--titulo); text-decoration:none; white-space:nowrap; transition:border-color .15s, color .15s}
+.encomenda .liga:hover{border-color:var(--cor); color:var(--cor-txt)}
 
 /* ── Dados ────────────────────────────────────────────────── */
 .dados{background:var(--faixa)}
@@ -242,15 +266,16 @@ footer{padding:2.4rem 0 3.4rem; color:var(--tenue); font-size:.82rem;
              asiático, com artigos, dados de audiência e parcerias com marcas.</p>
           <a class="liga" href="https://www.prikland.com.br">prikland.com.br&nbsp;↗</a>
         </article>
+      </div>
 
-        <article style="--cor:var(--ouro-escuro); --cor-txt:var(--ouro-txt)">
-          <div class="idx">05</div>
+      <div class="encomenda" style="--cor:var(--ouro-escuro); --cor-txt:var(--ouro-txt)">
+        <div class="info">
+          <div class="idx">Sob encomenda</div>
           <h3>Software sob medida</h3>
-          <div class="area">Sob encomenda</div>
           <p>Sistemas, integrações, tratamento de dados e consultoria em
              tecnologia. Do levantamento ao que entra em produção.</p>
-          <a class="liga" href="#contato">Falar com a gente&nbsp;→</a>
-        </article>
+        </div>
+        <a class="liga" href="#contato">Falar com a gente&nbsp;→</a>
       </div>
     </div>
   </section>
