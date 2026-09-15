@@ -4,11 +4,14 @@ Página única, sem build e sem dependência externa: um `index.html` que funcio
 em qualquer hospedagem estática.
 
 ```
-public/index.html                           a página
+content/blog/                               artigos em Markdown (.md)
+public/index.html                           a página principal
+public/blog/                                páginas geradas do blog
 public/sitemap.xml                          mapa do site para indexação (SEO)
 public/robots.txt                           diretivas para rastreadores e ponteiro do sitemap
 public/bcfc4849079645379c75ca0288a62c1e.txt chave de verificação do IndexNow (Bing)
 public/marca/                               ativos da identidade visual
+scripts/build_blog.py                       gerador do blog, agendamento e sitemap
 scripts/indexnow.sh                         script para submissão ao IndexNow
 wrangler.jsonc                              configuração do deploy na Cloudflare
 ```
@@ -97,6 +100,31 @@ O protocolo [IndexNow](https://www.indexnow.org) avisa imediatamente motores de 
    ./scripts/indexnow.sh https://clariosistemas.com.br/
    ```
 3. **Automação no Cloudflare (opcional)**: No painel da Cloudflare (`dash.cloudflare.com` → domínio `clariosistemas.com.br` → **Speed** ou **Crawlers / SEO**), é possível habilitar a opção nativa de **IndexNow** para que a própria Cloudflare notifique os indexadores automaticamente ao purgar cache.
+
+## Blog e Programação de Conteúdo
+
+Os artigos do blog são escritos em Markdown na pasta `content/blog/` com metadados no cabeçalho (frontmatter).
+
+### Como criar ou programar um artigo
+
+Crie um arquivo `.md` em `content/blog/` com o padrão:
+
+```yaml
+---
+title: Título do Artigo
+slug: titulo-do-artigo
+date: 2026-09-15
+area: Engenharia de software
+description: Descrição concisa para busca e meta tags.
+read_time: 4 min
+---
+
+Conteúdo do artigo em Markdown...
+```
+
+* **Programação de publicação**: o campo `date` controla a liberação. Se a data for posterior ao dia atual, o artigo fica em estado programado (não é gerado para produção nem entra no sitemap até a data estipulada).
+* **Construção estática e sitemap**: execute `python3 scripts/build_blog.py`. O script gera os arquivos HTML em `public/blog/`, cria a listagem em `public/blog/index.html` e regenera dinamicamente o `public/sitemap.xml` com todas as URLs ativas.
+* **Submissão com IndexNow**: use `python3 scripts/build_blog.py --indexnow` ou execute `./scripts/indexnow.sh` para notificar Bing e IndexNow sobre os novos links.
 
 ## Alternativa: GitHub Pages
 

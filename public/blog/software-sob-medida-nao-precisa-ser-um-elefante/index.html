@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<title>Software sob medida não precisa ser um elefante | Blog Clariô</title>
+<meta name="description" content="A maioria dos sistemas corporativos custa meses de reuniões antes de exibir a primeira tela. Uma abordagem enxuta coloca software estável em produção em poucas semanas.">
+<link rel="canonical" href="https://clariosistemas.com.br/blog/software-sob-medida-nao-precisa-ser-um-elefante/">
+<meta property="og:title" content="Software sob medida não precisa ser um elefante">
+<meta property="og:description" content="A maioria dos sistemas corporativos custa meses de reuniões antes de exibir a primeira tela. Uma abordagem enxuta coloca software estável em produção em poucas semanas.">
+<meta property="og:url" content="https://clariosistemas.com.br/blog/software-sob-medida-nao-precisa-ser-um-elefante/">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2026-09-15">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/marca/catope.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --vermelho:#A93B30; --ouro:#E3A22B; --ouro-escuro:#C8811C;
+  --rosa:#C56F7F; --azul:#3F6E8C; --verde:#5E9086;
+  --tinta:#33261C; --creme:#ECDCB4; --papel:#F7F3E9;
+
+  --texto:var(--tinta); --suave:#6E6656; --tenue:#7B7263;
+  --azul-txt:#3F6E8C; --verde-txt:#517C73; --rosa-txt:#A75E6C; --ouro-txt:#A06716; --vermelho-txt:#A93B30;
+  --fundo:#FCFBF7; --superficie:#fff; --faixa:var(--papel);
+  --linha:#E6DFCE; --linha-forte:#D6CDB6;
+  --titulo:var(--tinta); --marca:var(--vermelho); --link:var(--azul);
+
+  --display:'Baloo 2',system-ui,sans-serif;
+  --corpo:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,monospace;
+  --largura:70rem;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --texto:#F0E6D2; --suave:#C9BFA8; --tenue:#A2957E;
+    --azul-txt:#8FB8CE; --verde-txt:#8FBBB0; --rosa-txt:#E0A0AC; --ouro-txt:#E3A22B; --vermelho-txt:#E58278;
+    --fundo:#2A2018; --superficie:#342A20; --faixa:#241C15;
+    --linha:#453729; --linha-forte:#584937;
+    --titulo:#F0E6D2; --marca:var(--ouro); --link:#8FB8CE;
+  }
+}
+:root[data-theme="dark"]{
+  --texto:#F0E6D2; --suave:#C9BFA8; --tenue:#A2957E;
+  --azul-txt:#8FB8CE; --verde-txt:#8FBBB0; --rosa-txt:#E0A0AC; --ouro-txt:#E3A22B; --vermelho-txt:#E58278;
+  --fundo:#2A2018; --superficie:#342A20; --faixa:#241C15;
+  --linha:#453729; --linha-forte:#584937;
+  --titulo:#F0E6D2; --marca:var(--ouro); --link:#8FB8CE;
+}
+
+*{box-sizing:border-box}
+body{margin:0; background:var(--fundo); color:var(--texto);
+  font-family:var(--corpo); font-size:16.5px; line-height:1.62;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility}
+h1,h2,h3{margin:0; line-height:1.18}
+a{color:var(--link); text-underline-offset:.2em; text-decoration-thickness:1px}
+.env{max-width:var(--largura); margin:0 auto; padding:0 2rem}
+.env-artigo{max-width:48rem; margin:0 auto; padding:0 2rem}
+
+.rotulo{font-family:var(--mono); font-size:.72rem; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--tenue)}
+
+/* Cabecalho */
+header{position:sticky; top:0; z-index:20; background:var(--fundo);
+  border-bottom:1px solid var(--linha)}
+.barra{display:flex; align-items:center; justify-content:space-between;
+  gap:1rem; padding:.9rem 0; flex-wrap:wrap}
+.lockup{display:block; width:163px; height:60px;
+  background:url("/marca/lockup.svg") left center/contain no-repeat}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .lockup{background-image:url("/marca/lockup-dark.svg")}
+}
+:root[data-theme="dark"] .lockup{background-image:url("/marca/lockup-dark.svg")}
+nav{display:flex; gap:1.9rem}
+nav a{font-family:var(--mono); font-size:.75rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--suave); text-decoration:none}
+nav a:hover, nav a.ativo{color:var(--marca)}
+
+/* Hero do Blog */
+.capa-blog{padding:4.5rem 0 3.5rem; border-bottom:1px solid var(--linha);
+  background:radial-gradient(circle at 1px 1px, var(--linha-forte) 1px, transparent 0) 0 0/26px 26px, var(--fundo)}
+.capa-blog h1{font-family:var(--display); font-weight:700; font-size:clamp(2rem,4vw,2.8rem);
+  color:var(--titulo); margin:.7rem 0 .5rem}
+.capa-blog p{color:var(--suave); font-size:1.1rem; max-width:42rem; margin:0}
+
+/* Lista de Artigos */
+.secao-artigos{padding:4rem 0}
+.grade-artigos{display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fit, minmax(20rem, 1fr))}
+.card-artigo{background:var(--superficie); border:1px solid var(--linha); border-radius:6px;
+  padding:2rem; position:relative; display:flex; flex-direction:column; justify-content:space-between}
+.card-artigo::before{content:""; position:absolute; left:0; top:0; width:3px; height:100%; background:var(--cor, var(--azul))}
+.card-artigo .meta{display:flex; align-items:center; gap:.8rem; margin-bottom:.7rem; font-family:var(--mono); font-size:.72rem}
+.card-artigo .categoria{color:var(--cor-txt, var(--azul-txt)); font-weight:600; text-transform:uppercase; letter-spacing:.08em}
+.card-artigo .data{color:var(--tenue)}
+.card-artigo h2{font-family:var(--corpo); font-weight:800; font-size:1.3rem; margin:0 0 .7rem; color:var(--titulo)}
+.card-artigo h2 a{color:inherit; text-decoration:none}
+.card-artigo h2 a:hover{color:var(--marca)}
+.card-artigo p{margin:0 0 1.3rem; color:var(--suave); font-size:.96rem; line-height:1.6}
+.card-artigo .ler{font-family:var(--mono); font-size:.78rem; font-weight:600; color:var(--link); text-decoration:none}
+
+/* Pagina do Artigo Individual */
+.artigo-cabecalho{padding:3.5rem 0 2rem; border-bottom:1px solid var(--linha)}
+.breadcrumb{font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--tenue); margin-bottom:1.4rem}
+.breadcrumb a{color:inherit; text-decoration:none}
+.breadcrumb a:hover{color:var(--marca)}
+.artigo-meta{display:flex; align-items:center; gap:1rem; font-family:var(--mono); font-size:.75rem; margin-bottom:.9rem; flex-wrap:wrap}
+.artigo-meta .categoria{color:var(--marca); font-weight:600; text-transform:uppercase; letter-spacing:.08em}
+.artigo-meta .data{color:var(--tenue)}
+.artigo-meta .tempo{color:var(--suave); border-left:1px solid var(--linha); padding-left:1rem}
+.artigo-cabecalho h1{font-family:var(--corpo); font-weight:800; font-size:clamp(1.9rem,3.8vw,2.5rem); color:var(--titulo); letter-spacing:-.015em}
+.artigo-lead{font-size:1.15rem; color:var(--suave); line-height:1.6; margin-top:1rem}
+
+.artigo-corpo{padding:3rem 0 4rem; font-size:1.06rem; line-height:1.75; color:var(--texto)}
+.artigo-corpo p{margin:0 0 1.6rem}
+.artigo-corpo h2{font-family:var(--corpo); font-weight:800; font-size:1.45rem; color:var(--titulo); margin:2.6rem 0 .9rem}
+.artigo-corpo h3{font-family:var(--corpo); font-weight:800; font-size:1.2rem; color:var(--titulo); margin:2rem 0 .7rem}
+.artigo-corpo blockquote{margin:1.8rem 0; padding:1rem 1.4rem; border-left:3px solid var(--marca); background:var(--faixa); border-radius:0 4px 4px 0}
+.artigo-corpo blockquote p{margin:0; font-style:italic; color:var(--suave)}
+.artigo-corpo ul, .artigo-corpo ol{margin:0 0 1.6rem; padding-left:1.5rem}
+.artigo-corpo li{margin-bottom:.5rem}
+
+.artigo-rodape{margin-top:3rem; padding-top:2rem; border-top:1px solid var(--linha)}
+.box-autor{background:var(--superficie); border:1px solid var(--linha); border-radius:6px; padding:1.6rem 1.8rem; display:flex; flex-direction:column; gap:.8rem}
+.box-autor .titulo{font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--tenue)}
+.box-autor p{margin:0; font-size:.95rem; color:var(--suave)}
+.box-autor .links{display:flex; gap:1.5rem; font-family:var(--mono); font-size:.78rem; font-weight:600; margin-top:.4rem; flex-wrap:wrap}
+.voltar-blog{display:inline-block; margin-top:2.5rem; font-family:var(--mono); font-size:.82rem; color:var(--suave); text-decoration:none}
+.voltar-blog:hover{color:var(--marca)}
+
+/* Rodape Global */
+footer{padding:2.4rem 0 3.4rem; color:var(--tenue); font-size:.82rem; font-family:var(--mono); letter-spacing:.02em; border-top:1px solid var(--linha)}
+</style>
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Software sob medida não precisa ser um elefante", "description": "A maioria dos sistemas corporativos custa meses de reuniões antes de exibir a primeira tela. Uma abordagem enxuta coloca software estável em produção em poucas semanas.", "datePublished": "2026-09-15", "dateModified": "2026-09-15", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://clariosistemas.com.br/blog/software-sob-medida-nao-precisa-ser-um-elefante/"}, "author": {"@type": "Organization", "name": "Clariô Sistemas Inteligentes", "url": "https://clariosistemas.com.br"}, "publisher": {"@type": "Organization", "name": "Clariô Sistemas Inteligentes", "logo": {"@type": "ImageObject", "url": "https://clariosistemas.com.br/marca/catope.svg"}}}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="env barra">
+    <a href="/" aria-label="Clariô Sistemas Inteligentes">
+      <span class="lockup" role="img" aria-label="Clariô Sistemas Inteligentes"></span>
+    </a>
+    <nav>
+      <a href="/#produtos">Produtos</a>
+      <a href="/blog/" class="ativo">Blog</a>
+      <a href="/#empresa">Empresa</a>
+      <a href="/#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+
+<main>
+  <article>
+    <header class="artigo-cabecalho">
+      <div class="env-artigo">
+        <div class="breadcrumb">
+          <a href="/">Clariô</a> / <a href="/blog/">Blog</a> / <span>Engenharia de software</span>
+        </div>
+        <div class="artigo-meta">
+          <span class="categoria">Engenharia de software</span>
+          <span class="data">15 de setembro de 2026</span>
+          <span class="tempo">4 min de leitura</span>
+        </div>
+        <h1>Software sob medida não precisa ser um elefante</h1>
+        <p class="artigo-lead">A maioria dos sistemas corporativos custa meses de reuniões antes de exibir a primeira tela. Uma abordagem enxuta coloca software estável em produção em poucas semanas.</p>
+      </div>
+    </header>
+
+    <div class="env-artigo artigo-corpo">
+      <p>Costuma-se presumir que contratar um sistema sob medida exige equipes volumosas, meses de reuniões de alinhamento e orçamentos estratosféricos. Trata-se de uma explicação preguiçosa, repetida com frequência porque alimenta um modelo comercial que cobra por hora gasta em vez de cobrar por problema resolvido.</p>
+<p>Na prática das empresas, o resultado desse modelo quase sempre termina no mesmo lugar: uma planilha paralela com quarenta colunas que os funcionários mantêm em segredo. Eles usam essa planilha porque o software corporativo oficial, contratado por valores astronômicos após um ano de comitês, leva três minutos para carregar e exige cinco etapas de confirmação para salvar um único registro.</p>
+<p>O paradoxo é evidente: o sistema mais confiável não é aquele que acumula mais telas, relatórios coloridos ou botões que ninguém aperta. O sistema confiável é o que resolve o gargalo crítico da operação sem arrastar o peso daquilo que não tem utilidade. Quando você elimina a gordura do escopo, o código fica menor, o banco de dados responde em milissegundos e a probabilidade de falhas cai drasticamente.</p>
+<p>Em engenharia de software de verdade, precisão é a capacidade de dizer não para o excesso. Se a rotina de um departamento financeiro precisa conciliar pagamentos com extratos bancários, a prioridade máxima é validar cada linha com exatidão matemática e gerar o comprovante sem atritos. Não há motivo técnico razoável para transformar essa necessidade em um projeto faraônico de doze meses.</p>
+<p>Construir software sob medida com rigor de engenharia significa começar pela dor real de quem opera no dia a dia. Significa entregar o primeiro módulo funcional em semanas, testado com dados reais e pronto para o ambiente de produção. O código não existe para inflar apresentações corporativas de slides; existe para funcionar com firmeza às oito da manhã de segunda-feira na mão de quem depende dele para trabalhar.</p>
+
+      <div class="artigo-rodape">
+        <div class="box-autor">
+          <span class="titulo">Sobre a Clariô</span>
+          <p>
+            Construímos produtos próprios e sistemas sob medida com rigor de engenharia
+            e propósito prático. 
+          </p>
+          <div class="links">
+            <a href="/#produtos">Conhecer produtos&nbsp;→</a>
+            <a href="/#contato">Falar sobre um projeto&nbsp;→</a>
+          </div>
+        </div>
+
+        <a class="voltar-blog" href="/blog/">&larr; Voltar para a lista de artigos</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+
+<footer>
+  <div class="env">
+    © <span id="ano">2026</span> CLARIO · Análise, Desenvolvimento de Software e Consultoria em TI LTDA · CNPJ 68.569.828/0001-07
+  </div>
+</footer>
+<script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>
