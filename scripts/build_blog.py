@@ -4,8 +4,9 @@ scripts/build_blog.py
 Gera as páginas estáticas do Blog da Clariô, atualiza o sitemap.xml dinamicamente
 e suporta submissão ao IndexNow (Bing).
 
-Suporta programação de conteúdo (scheduling): posts com data futura são ignorados
-no build de produção até a data estipulada no frontmatter.
+Otimizado para SEO, GEO (Generative Engine Optimization) e AGO (Answer/Agent Engine Optimization).
+Suporta programação de conteúdo: posts com data futura são ignorados no build de produção
+até a data estipulada no frontmatter.
 """
 
 import os
@@ -26,7 +27,6 @@ SITE_URL = "https://clariosistemas.com.br"
 INDEXNOW_KEY = "bcfc4849079645379c75ca0288a62c1e"
 INDEXNOW_KEY_LOCATION = f"{SITE_URL}/{INDEXNOW_KEY}.txt"
 
-# Timezone Brasil (UTC-3)
 TZ_BRT = timezone(timedelta(hours=-3))
 
 MESES = {
@@ -101,7 +101,7 @@ body{margin:0; background:var(--fundo); color:var(--texto);
 h1,h2,h3{margin:0; line-height:1.18}
 a{color:var(--link); text-underline-offset:.2em; text-decoration-thickness:1px}
 .env{max-width:var(--largura); margin:0 auto; padding:0 2rem}
-.env-artigo{max-width:48rem; margin:0 auto; padding:0 2rem}
+.env-artigo{max-width:46rem; margin:0 auto; padding:0 1.5rem}
 
 .rotulo{font-family:var(--mono); font-size:.72rem; font-weight:500;
   letter-spacing:.14em; text-transform:uppercase; color:var(--tenue)}
@@ -110,71 +110,72 @@ a{color:var(--link); text-underline-offset:.2em; text-decoration-thickness:1px}
 header{position:sticky; top:0; z-index:20; background:var(--fundo);
   border-bottom:1px solid var(--linha)}
 .barra{display:flex; align-items:center; justify-content:space-between;
-  gap:1rem; padding:.9rem 0; flex-wrap:wrap}
-.lockup{display:block; width:163px; height:60px;
+  gap:1rem; padding:.75rem 0; flex-wrap:wrap}
+.lockup{display:block; width:150px; height:54px;
   background:url("/marca/lockup.svg") left center/contain no-repeat}
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]) .lockup{background-image:url("/marca/lockup-dark.svg")}
 }
 :root[data-theme="dark"] .lockup{background-image:url("/marca/lockup-dark.svg")}
-nav{display:flex; gap:1.9rem}
+nav{display:flex; gap:1.7rem}
 nav a{font-family:var(--mono); font-size:.75rem; letter-spacing:.12em;
   text-transform:uppercase; color:var(--suave); text-decoration:none}
 nav a:hover, nav a.ativo{color:var(--marca)}
 
 /* Hero do Blog */
-.capa-blog{padding:4.5rem 0 3.5rem; border-bottom:1px solid var(--linha);
+.capa-blog{padding:3.5rem 0 2.5rem; border-bottom:1px solid var(--linha);
   background:radial-gradient(circle at 1px 1px, var(--linha-forte) 1px, transparent 0) 0 0/26px 26px, var(--fundo)}
-.capa-blog h1{font-family:var(--display); font-weight:700; font-size:clamp(2rem,4vw,2.8rem);
-  color:var(--titulo); margin:.7rem 0 .5rem}
-.capa-blog p{color:var(--suave); font-size:1.1rem; max-width:42rem; margin:0}
+.capa-blog h1{font-family:var(--display); font-weight:700; font-size:clamp(1.9rem,3.6vw,2.5rem);
+  color:var(--titulo); margin:.5rem 0 .4rem}
+.capa-blog p{color:var(--suave); font-size:1.05rem; max-width:42rem; margin:0}
 
 /* Lista de Artigos */
-.secao-artigos{padding:4rem 0}
-.grade-artigos{display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fit, minmax(20rem, 1fr))}
+.secao-artigos{padding:3.2rem 0 4rem}
+.grade-artigos{display:grid; gap:1.4rem; grid-template-columns:repeat(auto-fit, minmax(20rem, 1fr))}
 .card-artigo{background:var(--superficie); border:1px solid var(--linha); border-radius:6px;
-  padding:2rem; position:relative; display:flex; flex-direction:column; justify-content:space-between}
+  padding:1.8rem; position:relative; display:flex; flex-direction:column; justify-content:space-between}
 .card-artigo::before{content:""; position:absolute; left:0; top:0; width:3px; height:100%; background:var(--cor, var(--azul))}
-.card-artigo .meta{display:flex; align-items:center; gap:.8rem; margin-bottom:.7rem; font-family:var(--mono); font-size:.72rem}
+.card-artigo .meta{display:flex; align-items:center; gap:.7rem; margin-bottom:.6rem; font-family:var(--mono); font-size:.72rem}
 .card-artigo .categoria{color:var(--cor-txt, var(--azul-txt)); font-weight:600; text-transform:uppercase; letter-spacing:.08em}
 .card-artigo .data{color:var(--tenue)}
-.card-artigo h2{font-family:var(--corpo); font-weight:800; font-size:1.3rem; margin:0 0 .7rem; color:var(--titulo)}
+.card-artigo h2{font-family:var(--corpo); font-weight:800; font-size:1.24rem; margin:0 0 .6rem; color:var(--titulo)}
 .card-artigo h2 a{color:inherit; text-decoration:none}
 .card-artigo h2 a:hover{color:var(--marca)}
-.card-artigo p{margin:0 0 1.3rem; color:var(--suave); font-size:.96rem; line-height:1.6}
+.card-artigo p{margin:0 0 1.2rem; color:var(--suave); font-size:.95rem; line-height:1.55}
 .card-artigo .ler{font-family:var(--mono); font-size:.78rem; font-weight:600; color:var(--link); text-decoration:none}
 
-/* Pagina do Artigo Individual */
-.artigo-cabecalho{padding:3.5rem 0 2rem; border-bottom:1px solid var(--linha)}
-.breadcrumb{font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--tenue); margin-bottom:1.4rem}
-.breadcrumb a{color:inherit; text-decoration:none}
-.breadcrumb a:hover{color:var(--marca)}
-.artigo-meta{display:flex; align-items:center; gap:1rem; font-family:var(--mono); font-size:.75rem; margin-bottom:.9rem; flex-wrap:wrap}
-.artigo-meta .categoria{color:var(--marca); font-weight:600; text-transform:uppercase; letter-spacing:.08em}
-.artigo-meta .data{color:var(--tenue)}
-.artigo-meta .tempo{color:var(--suave); border-left:1px solid var(--linha); padding-left:1rem}
-.artigo-cabecalho h1{font-family:var(--corpo); font-weight:800; font-size:clamp(1.9rem,3.8vw,2.5rem); color:var(--titulo); letter-spacing:-.015em}
-.artigo-lead{font-size:1.15rem; color:var(--suave); line-height:1.6; margin-top:1rem}
+/* Cabecalho Compacto do Artigo Individual */
+.artigo-cabecalho{padding:1.5rem 0 1.2rem; border-bottom:1px solid var(--linha)}
+.artigo-topo{display:flex; align-items:center; gap:.55rem; font-family:var(--mono); font-size:.72rem; margin-bottom:.5rem; flex-wrap:wrap; color:var(--tenue)}
+.artigo-topo .voltar-topo{color:var(--link); text-decoration:none; font-weight:600}
+.artigo-topo .voltar-topo:hover{color:var(--marca)}
+.artigo-topo .sep{color:var(--linha-forte)}
+.artigo-topo .categoria{color:var(--marca); font-weight:600; text-transform:uppercase; letter-spacing:.08em}
+.artigo-topo .data{color:var(--tenue)}
+.artigo-topo .tempo{color:var(--suave)}
+.artigo-cabecalho h1{font-family:var(--corpo); font-weight:800; font-size:clamp(1.55rem,2.9vw,2.05rem); color:var(--titulo); letter-spacing:-.015em; line-height:1.22; margin:0 0 .45rem}
+.artigo-lead{font-size:1.02rem; color:var(--suave); line-height:1.52; margin:0}
 
-.artigo-corpo{padding:3rem 0 4rem; font-size:1.06rem; line-height:1.75; color:var(--texto)}
-.artigo-corpo p{margin:0 0 1.6rem}
-.artigo-corpo h2{font-family:var(--corpo); font-weight:800; font-size:1.45rem; color:var(--titulo); margin:2.6rem 0 .9rem}
-.artigo-corpo h3{font-family:var(--corpo); font-weight:800; font-size:1.2rem; color:var(--titulo); margin:2rem 0 .7rem}
-.artigo-corpo blockquote{margin:1.8rem 0; padding:1rem 1.4rem; border-left:3px solid var(--marca); background:var(--faixa); border-radius:0 4px 4px 0}
+/* Corpo do Artigo */
+.artigo-corpo{padding:1.8rem 0 3.5rem; font-size:1.05rem; line-height:1.72; color:var(--texto)}
+.artigo-corpo p{margin:0 0 1.35rem}
+.artigo-corpo h2{font-family:var(--corpo); font-weight:800; font-size:1.32rem; color:var(--titulo); margin:2.1rem 0 .75rem; letter-spacing:-.01em}
+.artigo-corpo h3{font-family:var(--corpo); font-weight:800; font-size:1.14rem; color:var(--titulo); margin:1.6rem 0 .5rem}
+.artigo-corpo blockquote{margin:1.5rem 0; padding:.85rem 1.25rem; border-left:3px solid var(--marca); background:var(--faixa); border-radius:0 4px 4px 0}
 .artigo-corpo blockquote p{margin:0; font-style:italic; color:var(--suave)}
-.artigo-corpo ul, .artigo-corpo ol{margin:0 0 1.6rem; padding-left:1.5rem}
-.artigo-corpo li{margin-bottom:.5rem}
+.artigo-corpo ul, .artigo-corpo ol{margin:0 0 1.5rem; padding-left:1.4rem}
+.artigo-corpo li{margin-bottom:.45rem}
 
-.artigo-rodape{margin-top:3rem; padding-top:2rem; border-top:1px solid var(--linha)}
-.box-autor{background:var(--superficie); border:1px solid var(--linha); border-radius:6px; padding:1.6rem 1.8rem; display:flex; flex-direction:column; gap:.8rem}
+.artigo-rodape{margin-top:2.8rem; padding-top:1.8rem; border-top:1px solid var(--linha)}
+.box-autor{background:var(--superficie); border:1px solid var(--linha); border-radius:6px; padding:1.5rem 1.6rem; display:flex; flex-direction:column; gap:.7rem}
 .box-autor .titulo{font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--tenue)}
-.box-autor p{margin:0; font-size:.95rem; color:var(--suave)}
-.box-autor .links{display:flex; gap:1.5rem; font-family:var(--mono); font-size:.78rem; font-weight:600; margin-top:.4rem; flex-wrap:wrap}
-.voltar-blog{display:inline-block; margin-top:2.5rem; font-family:var(--mono); font-size:.82rem; color:var(--suave); text-decoration:none}
+.box-autor p{margin:0; font-size:.94rem; color:var(--suave)}
+.box-autor .links{display:flex; gap:1.4rem; font-family:var(--mono); font-size:.78rem; font-weight:600; margin-top:.3rem; flex-wrap:wrap}
+.voltar-blog{display:inline-block; margin-top:2rem; font-family:var(--mono); font-size:.82rem; color:var(--suave); text-decoration:none}
 .voltar-blog:hover{color:var(--marca)}
 
 /* Rodape Global */
-footer{padding:2.4rem 0 3.4rem; color:var(--tenue); font-size:.82rem; font-family:var(--mono); letter-spacing:.02em; border-top:1px solid var(--linha)}
+footer{padding:2.2rem 0 3.2rem; color:var(--tenue); font-size:.82rem; font-family:var(--mono); letter-spacing:.02em; border-top:1px solid var(--linha)}
 </style>
 """
 
@@ -221,11 +222,27 @@ def render_article_page(post, meta, html_body):
     formatted_date = format_date(date_str)
     canonical_url = f"{SITE_URL}/blog/{slug}/"
 
+    # Extracao de texto puro para o articleBody do schema (essencial para GEO e AGO)
+    plain_text = re.sub(r'<[^>]+>', ' ', html_body)
+    plain_text = re.sub(r'\s+', ' ', plain_text).strip()
+
+    keywords_list = [
+        area,
+        "Clariô Sistemas Inteligentes",
+        "desenvolvimento de software",
+        "software sob medida",
+        "engenharia de software",
+        "tecnologia com proposito"
+    ]
+
     schema_json = json.dumps({
         "@context": "https://schema.org",
-        "@type": "BlogPosting",
+        "@type": "TechArticle",
         "headline": title,
         "description": description,
+        "articleBody": plain_text[:5000],
+        "inLanguage": "pt-BR",
+        "keywords": keywords_list,
         "datePublished": date_str,
         "dateModified": date_str,
         "mainEntityOfPage": {
@@ -240,6 +257,7 @@ def render_article_page(post, meta, html_body):
         "publisher": {
             "@type": "Organization",
             "name": "Clariô Sistemas Inteligentes",
+            "url": SITE_URL,
             "logo": {
                 "@type": "ImageObject",
                 "url": f"{SITE_URL}/marca/catope.svg"
@@ -258,6 +276,7 @@ def render_article_page(post, meta, html_body):
 <meta property="og:url" content="{canonical_url}">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="{date_str}">
+<meta property="article:section" content="{area}">
 {SHARED_HEAD}
 <script type="application/ld+json">
 {schema_json}
@@ -270,13 +289,14 @@ def render_article_page(post, meta, html_body):
   <article>
     <header class="artigo-cabecalho">
       <div class="env-artigo">
-        <div class="breadcrumb">
-          <a href="/">Clariô</a> / <a href="/blog/">Blog</a> / <span>{area}</span>
-        </div>
-        <div class="artigo-meta">
+        <div class="artigo-topo">
+          <a href="/blog/" class="voltar-topo">&larr; Blog</a>
+          <span class="sep">/</span>
           <span class="categoria">{area}</span>
+          <span class="sep">&middot;</span>
           <span class="data">{formatted_date}</span>
-          <span class="tempo">{read_time} de leitura</span>
+          <span class="sep">&middot;</span>
+          <span class="tempo">{read_time}</span>
         </div>
         <h1>{title}</h1>
         <p class="artigo-lead">{description}</p>
@@ -291,11 +311,11 @@ def render_article_page(post, meta, html_body):
           <span class="titulo">Sobre a Clariô</span>
           <p>
             Construímos produtos próprios e sistemas sob medida com rigor de engenharia
-            e propósito prático. 
+            e propósito prático. Curitiba/PR e Montes Claros/MG.
           </p>
           <div class="links">
-            <a href="/#produtos">Conhecer produtos&nbsp;→</a>
-            <a href="/#contato">Falar sobre um projeto&nbsp;→</a>
+            <a href="/#produtos">Conhecer produtos&nbsp;&rarr;</a>
+            <a href="/#contato">Falar sobre um projeto&nbsp;&rarr;</a>
           </div>
         </div>
 
