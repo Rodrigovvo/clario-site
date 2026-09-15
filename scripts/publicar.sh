@@ -78,7 +78,7 @@ errors = []
 def check_text_rules(path):
     with open(path, "r", encoding="utf-8", errors="ignore") as f:
         for idx, line in enumerate(f, 1):
-            if "—" in line or "–" in line:
+            if "\u2014" in line or "\u2013" in line:
                 errors.append(f"[TRAVESSAO] {path}:{idx}: {line.strip()}")
             for ch in line:
                 cp = ord(ch)
@@ -166,7 +166,7 @@ else
   fi
 
   # Valida se a propria mensagem de commit contem travessoes ou emojis
-  if echo "${COMMIT_MSG}" | grep -qE "[—–]"; then
+  if python3 -c 'import sys; sys.exit(0 if any(c in sys.argv[1] for c in ["\u2013", "\u2014"]) else 1)' "${COMMIT_MSG}"; then
     echo "ERRO: A mensagem de commit contem travessao. Substitua por virgula, dois-pontos ou hifen simples."
     exit 1
   fi
