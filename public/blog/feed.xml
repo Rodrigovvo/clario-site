@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog da Clariô Sistemas Inteligentes</title>
+    <link>https://clariosistemas.com.br/blog/</link>
+    <atom:link href="https://clariosistemas.com.br/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Engenharia de software, arquitetura web e a rotina real de colocar sistemas em produção.</description>
+    <language>pt-BR</language>
+    <lastBuildDate>Tue, 15 Sep 2026 00:00:00 -0300</lastBuildDate>
+    <item>
+      <title>A prancheta vence o aplicativo</title>
+      <link>https://clariosistemas.com.br/blog/a-prancheta-vence-o-aplicativo/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/a-prancheta-vence-o-aplicativo/</guid>
+      <description>O que aprendemos ao desenhar tecnologia para visitas domiciliares a pessoas idosas e por que informatizar serviços públicos exige entender a rotina real de quem está na ponta.</description>
+      <category>Saúde e gestão pública</category>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
+    <item>
+      <title>O custo oculto de apoiar operações críticas em planilhas instáveis</title>
+      <link>https://clariosistemas.com.br/blog/o-custo-oculto-das-planilhas-na-operacao/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/o-custo-oculto-das-planilhas-na-operacao/</guid>
+      <description>Planilhas parecem gratuitas e flexíveis, mas cobram um pedágio invisível em retrabalho, perda de dados e lentidão. O desmonte de como rotinas manuais travam empresas e clínicas.</description>
+      <category>Sistemas sob encomenda</category>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
+    <item>
+      <title>Por que construímos sem dependências desnecessárias</title>
+      <link>https://clariosistemas.com.br/blog/por-que-construimos-sem-dependencias-desnecessarias/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/por-que-construimos-sem-dependencias-desnecessarias/</guid>
+      <description>A decisão técnica de priorizar padrões nativos da web em vez de carregar megabytes de código desnecessário para tarefas que o navegador resolve com precisão.</description>
+      <category>Arquitetura web</category>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
+    <item>
+      <title>Software sob medida não precisa ser um elefante</title>
+      <link>https://clariosistemas.com.br/blog/software-sob-medida-nao-precisa-ser-um-elefante/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/software-sob-medida-nao-precisa-ser-um-elefante/</guid>
+      <description>A maioria dos sistemas corporativos custa meses de reuniões antes de exibir a primeira tela. Uma abordagem enxuta coloca software estável em produção em poucas semanas.</description>
+      <category>Engenharia de software</category>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
+  </channel>
+</rss>

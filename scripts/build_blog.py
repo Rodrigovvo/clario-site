@@ -241,9 +241,9 @@ def render_article_page(post, meta, html_body):
         "tecnologia com proposito"
     ]
 
-    schema_json = json.dumps({
-        "@context": "https://schema.org",
+    artigo_schema = {
         "@type": "TechArticle",
+        "@id": f"{canonical_url}#artigo",
         "headline": title,
         "description": description,
         "articleBody": plain_text[:5000],
@@ -267,8 +267,30 @@ def render_article_page(post, meta, html_body):
             "logo": {
                 "@type": "ImageObject",
                 "url": f"{SITE_URL}/marca/catope.svg"
+            },
+            "email": "contato@clariosistemas.com.br",
+            "telephone": "+5538920000181",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Curitiba",
+                "addressRegion": "PR",
+                "addressCountry": "BR"
             }
         }
+    }
+
+    trilha_schema = {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Início", "item": f"{SITE_URL}/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": f"{SITE_URL}/blog/"},
+            {"@type": "ListItem", "position": 3, "name": title, "item": canonical_url}
+        ]
+    }
+
+    schema_json = json.dumps({
+        "@context": "https://schema.org",
+        "@graph": [artigo_schema, trilha_schema]
     }, ensure_ascii=False)
 
     return f"""<!doctype html>
@@ -283,6 +305,11 @@ def render_article_page(post, meta, html_body):
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="{date_str}">
 <meta property="article:section" content="{area}">
+<meta property="og:site_name" content="Clariô Sistemas Inteligentes">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="{SITE_URL}/apple-touch-icon.png">
+<meta name="author" content="Clariô Sistemas Inteligentes">
+<link rel="alternate" type="application/rss+xml" title="Blog da Clariô" href="{SITE_URL}/blog/feed.xml">
 {SHARED_HEAD}
 <script type="application/ld+json">
 {schema_json}
@@ -369,6 +396,41 @@ def render_blog_index(published_posts):
 
     cards_str = "\n".join(cards_html)
 
+    schema_json = json.dumps({
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Blog",
+                "@id": f"{canonical_url}#blog",
+                "name": "Blog da Clariô Sistemas Inteligentes",
+                "description": "Artigos sobre engenharia de software, arquitetura web, gestão pública e a rotina real de colocar sistemas em produção.",
+                "url": canonical_url,
+                "inLanguage": "pt-BR",
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Clariô Sistemas Inteligentes",
+                    "url": SITE_URL
+                },
+                "blogPost": [
+                    {
+                        "@type": "TechArticle",
+                        "headline": p["meta"].get("title", ""),
+                        "description": p["meta"].get("description", ""),
+                        "datePublished": p["meta"].get("date", ""),
+                        "url": f"{SITE_URL}/blog/{p['meta'].get('slug')}/"
+                    } for p in published_posts
+                ]
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "Início", "item": f"{SITE_URL}/"},
+                    {"@type": "ListItem", "position": 2, "name": "Blog", "item": canonical_url}
+                ]
+            }
+        ]
+    }, ensure_ascii=False)
+
     return f"""<!doctype html>
 <html lang="pt-BR">
 <head>
@@ -379,7 +441,14 @@ def render_blog_index(published_posts):
 <meta property="og:description" content="Artigos sobre engenharia de software, arquitetura web e tecnologia com propósito.">
 <meta property="og:url" content="{canonical_url}">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Clariô Sistemas Inteligentes">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="{SITE_URL}/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="Blog da Clariô" href="{SITE_URL}/blog/feed.xml">
 {SHARED_HEAD}
+<script type="application/ld+json">
+{schema_json}
+</script>
 </head>
 <body>
 {HEADER_HTML}
@@ -408,6 +477,57 @@ def render_blog_index(published_posts):
 </body>
 </html>
 """
+
+def generate_rss(published_posts):
+    """Gera o feed RSS 2.0 do blog em public/blog/feed.xml."""
+    def esc(txt):
+        return (str(txt).replace("&", "&amp;").replace("<", "&lt;")
+                .replace(">", "&gt;").replace('"', "&quot;"))
+
+    # Usa a data do artigo mais recente, e nao o instante do build:
+    # mantem o feed estavel entre builds sem alteracao de conteudo.
+    if published_posts:
+        mais_recente = max(p["post_date"] for p in published_posts)
+        agora = datetime.combine(mais_recente, datetime.min.time(), TZ_BRT).strftime("%a, %d %b %Y %H:%M:%S %z")
+    else:
+        agora = datetime.now(TZ_BRT).strftime("%a, %d %b %Y %H:%M:%S %z")
+    itens = []
+    for p in published_posts:
+        m = p["meta"]
+        slug = m.get("slug")
+        url = f"{SITE_URL}/blog/{slug}/"
+        try:
+            pub = datetime.strptime(m.get("date", ""), "%Y-%m-%d").replace(tzinfo=TZ_BRT)
+            pub_str = pub.strftime("%a, %d %b %Y %H:%M:%S %z")
+        except ValueError:
+            pub_str = agora
+        itens.append(f"""    <item>
+      <title>{esc(m.get("title", ""))}</title>
+      <link>{url}</link>
+      <guid isPermaLink="true">{url}</guid>
+      <description>{esc(m.get("description", ""))}</description>
+      <category>{esc(m.get("area", "Tecnologia"))}</category>
+      <pubDate>{pub_str}</pubDate>
+    </item>""")
+
+    feed = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog da Clariô Sistemas Inteligentes</title>
+    <link>{SITE_URL}/blog/</link>
+    <atom:link href="{SITE_URL}/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Engenharia de software, arquitetura web e a rotina real de colocar sistemas em produção.</description>
+    <language>pt-BR</language>
+    <lastBuildDate>{agora}</lastBuildDate>
+{chr(10).join(itens)}
+  </channel>
+</rss>
+"""
+    feed_path = os.path.join(OUTPUT_DIR, "feed.xml")
+    with open(feed_path, "w", encoding="utf-8") as f:
+        f.write(feed)
+    print(f"  Gerado: public/blog/feed.xml ({len(itens)} itens)")
+
 
 def generate_sitemap(published_posts, today_str):
     urls = [
@@ -537,6 +657,9 @@ def main():
     with open(os.path.join(OUTPUT_DIR, "index.html"), "w", encoding="utf-8") as out:
         out.write(index_html)
     print("  Gerado: public/blog/index.html")
+
+    # Gerar feed RSS
+    generate_rss(published_posts)
 
     # Atualizar sitemap
     active_urls = generate_sitemap(published_posts, today_str)

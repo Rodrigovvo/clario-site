@@ -7,6 +7,7 @@ em qualquer hospedagem estática.
 content/blog/                               artigos em Markdown (.md)
 public/index.html                           a página principal
 public/blog/                                páginas geradas do blog
+public/blog/feed.xml                        feed RSS gerado a partir dos artigos publicados
 public/sitemap.xml                          mapa do site para indexação (SEO)
 public/robots.txt                           diretivas para rastreadores e ponteiro do sitemap
 public/bcfc4849079645379c75ca0288a62c1e.txt chave de verificação do IndexNow (Bing)
@@ -15,7 +16,16 @@ scripts/build_blog.py                       gerador do blog, agendamento e sitem
 scripts/indexnow.sh                         script para submissão ao IndexNow
 scripts/publicar.sh                         script de validação, commit, push e deploy
 wrangler.jsonc                              configuração do deploy na Cloudflare
+.AGENTS/                                    plano de marketing, guia de voz e material de execução
 ```
+
+O diretório `.AGENTS/` reúne a estratégia e o material operacional: o
+[plano de marketing](.AGENTS/PLANO_DE_MARKETING.md), o
+[guia de voz](.AGENTS/GUIA_DE_VOZ.md), o
+[guia de prospecção](.AGENTS/PROSPECCAO_SOFTWARE_SOB_ENCOMENDA.md), o
+[calendário editorial](.AGENTS/CALENDARIO_EDITORIAL.md) com a fila de artigos
+programados e as [publicações de LinkedIn](.AGENTS/LINKEDIN_PUBLICACOES.md)
+prontas para cada artigo.
 
 ## Identidade visual
 
@@ -137,6 +147,7 @@ Conteúdo do artigo em Markdown...
 
 * **Programação de publicação**: o campo `date` controla a liberação. Se a data for posterior ao dia atual, o artigo fica em estado programado (não é gerado para produção nem entra no sitemap até a data estipulada).
 * **Construção estática e sitemap**: execute `python3 scripts/build_blog.py`. O script gera os arquivos HTML em `public/blog/`, cria a listagem em `public/blog/index.html` e regenera dinamicamente o `public/sitemap.xml` com todas as URLs ativas.
+* **Feed RSS**: o mesmo comando gera `public/blog/feed.xml` com os artigos já publicados. A data de construção do feed acompanha o artigo mais recente, e não o instante do build, para não gerar diferença no Git a cada execução.
 * **Submissão com IndexNow**: use `python3 scripts/build_blog.py --indexnow` ou execute `./scripts/indexnow.sh` para notificar Bing e IndexNow sobre os novos links.
 
 ## Alternativa: GitHub Pages
