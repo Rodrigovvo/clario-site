@@ -6,7 +6,15 @@
     <atom:link href="https://clariosistemas.com.br/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Engenharia de software, arquitetura web e a rotina real de colocar sistemas em produção.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Tue, 15 Sep 2026 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2026 00:00:00 -0300</lastBuildDate>
+    <item>
+      <title>Onde a inteligência artificial realmente ajuda na rotina da empresa</title>
+      <link>https://clariosistemas.com.br/blog/onde-a-ia-realmente-ajuda-na-empresa/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/onde-a-ia-realmente-ajuda-na-empresa/</guid>
+      <description>Longe das promessas infladas e do jargão de marketing, modelos de linguagem e algoritmos de extração têm utilidade prática comprovada para triar documentos, organizar dados e eliminar gargalos operacionais.</description>
+      <category>Automação e engenharia</category>
+      <pubDate>Wed, 16 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
     <item>
       <title>A prancheta vence o aplicativo</title>
       <link>https://clariosistemas.com.br/blog/a-prancheta-vence-o-aplicativo/</link>
