@@ -6,7 +6,15 @@
     <atom:link href="https://clariosistemas.com.br/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Engenharia de software, arquitetura web e a rotina real de colocar sistemas em produção.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Wed, 16 Sep 2026 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Thu, 17 Sep 2026 00:00:00 -0300</lastBuildDate>
+    <item>
+      <title>Como o RAG conecta a inteligência artificial aos dados reais da empresa sem alucinação</title>
+      <link>https://clariosistemas.com.br/blog/como-o-rag-conecta-ia-aos-dados-da-empresa/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/como-o-rag-conecta-ia-aos-dados-da-empresa/</guid>
+      <description>Em vez de tentar treinar modelos caros do zero, a arquitetura de RAG permite consultar documentos corporativos com precisão, reduzindo alucinações e garantindo auditoria e controle de custos.</description>
+      <category>Automação e engenharia</category>
+      <pubDate>Thu, 17 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
     <item>
       <title>Onde a inteligência artificial realmente ajuda na rotina da empresa</title>
       <link>https://clariosistemas.com.br/blog/onde-a-ia-realmente-ajuda-na-empresa/</link>
