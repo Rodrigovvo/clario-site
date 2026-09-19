@@ -6,7 +6,39 @@
     <atom:link href="https://clariosistemas.com.br/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Engenharia de software, arquitetura web e a rotina real de colocar sistemas em produção.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Thu, 17 Sep 2026 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Sat, 19 Sep 2026 00:00:00 -0300</lastBuildDate>
+    <item>
+      <title>O que uma empresa de Montes Claros deve avaliar antes de contratar um projeto de inteligência artificial</title>
+      <link>https://clariosistemas.com.br/blog/o-que-avaliar-antes-de-contratar-ia-para-sua-empresa/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/o-que-avaliar-antes-de-contratar-ia-para-sua-empresa/</guid>
+      <description>Guia prático com cinco critérios objetivos para diretores e gestores avaliarem fornecedores de tecnologia, evitando dependência cara e promessas vazias.</description>
+      <category>Estratégia e tecnologia</category>
+      <pubDate>Sat, 19 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
+    <item>
+      <title>Previsão de demanda com inteligência artificial na distribuição regional: reduzindo estoque parado e falta de produto no Norte de Minas</title>
+      <link>https://clariosistemas.com.br/blog/previsao-de-demanda-com-ia-distribuicao-norte-de-minas/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/previsao-de-demanda-com-ia-distribuicao-norte-de-minas/</guid>
+      <description>Como distribuidores e atacadistas sediados em Montes Claros usam modelos preditivos de machine learning para calcular reposição de compras e equilibrar rotas de entrega.</description>
+      <category>Logística e inteligência de dados</category>
+      <pubDate>Sat, 19 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
+    <item>
+      <title>Visão computacional e modelos locais no chão de fábrica: controle de qualidade sem depender da nuvem</title>
+      <link>https://clariosistemas.com.br/blog/visao-computacional-e-ia-local-chao-de-fabrica/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/visao-computacional-e-ia-local-chao-de-fabrica/</guid>
+      <description>Arquitetura técnica de inferência local (edge AI) para inspeção visual em esteiras industriais com câmeras dedicadas, modelos ONNX/YOLO e integração com CLPs.</description>
+      <category>Engenharia e IA industrial</category>
+      <pubDate>Sat, 19 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
+    <item>
+      <title>Inteligência artificial na indústria e no comércio de Montes Claros: onde o investimento dá retorno real e onde é desperdício</title>
+      <link>https://clariosistemas.com.br/blog/ia-na-industria-e-no-comercio-de-montes-claros/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/ia-na-industria-e-no-comercio-de-montes-claros/</guid>
+      <description>Como indústrias, atacadistas e empresas do Norte de Minas separam o modismo tecnológico do retorno financeiro concreto em automação inteligente e tomada de decisão.</description>
+      <category>Indústria e gestão</category>
+      <pubDate>Fri, 18 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
     <item>
       <title>Como o RAG conecta a inteligência artificial aos dados reais da empresa sem alucinação</title>
       <link>https://clariosistemas.com.br/blog/como-o-rag-conecta-ia-aos-dados-da-empresa/</link>

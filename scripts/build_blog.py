@@ -232,14 +232,27 @@ def render_article_page(post, meta, html_body):
     plain_text = re.sub(r'<[^>]+>', ' ', html_body)
     plain_text = re.sub(r'\s+', ' ', plain_text).strip()
 
+    custom_keywords = meta.get("keywords", "")
+    if isinstance(custom_keywords, str) and custom_keywords:
+        extra_kws = [k.strip() for k in custom_keywords.split(",") if k.strip()]
+    elif isinstance(custom_keywords, list):
+        extra_kws = [str(k).strip() for k in custom_keywords]
+    else:
+        extra_kws = []
+
     keywords_list = [
         area,
         "Clariô Sistemas Inteligentes",
+        "inteligência artificial",
+        "Montes Claros",
+        "Norte de Minas",
         "desenvolvimento de software",
         "software sob medida",
+        "IA industrial e empresarial",
         "engenharia de software",
         "tecnologia com proposito"
-    ]
+    ] + extra_kws
+    keywords_list = list(dict.fromkeys(keywords_list))
 
     artigo_schema = {
         "@type": "TechArticle",
@@ -249,6 +262,10 @@ def render_article_page(post, meta, html_body):
         "articleBody": plain_text[:5000],
         "inLanguage": "pt-BR",
         "keywords": keywords_list,
+        "about": [
+            {"@type": "Thing", "name": "Inteligência Artificial"},
+            {"@type": "Place", "name": "Montes Claros"}
+        ],
         "datePublished": date_str,
         "dateModified": date_str,
         "mainEntityOfPage": {
