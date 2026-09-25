@@ -1,7 +1,7 @@
 ---
 title: Por que um sistema leve custa menos em nuvem e não trava no computador do funcionário
 slug: sistema-leve-custa-menos-em-nuvem
-date: 2026-09-29
+date: 2026-09-25
 area: Infraestrutura e custo
 description: A fatura do servidor e a lentidão na recepção têm a mesma causa. Como o peso do software se converte em custo mensal, em máquina nova e em tempo perdido por quem opera o sistema.
 read_time: 5 min

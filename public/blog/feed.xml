@@ -6,7 +6,31 @@
     <atom:link href="https://clariosistemas.com.br/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Engenharia de software, arquitetura web e a rotina real de colocar sistemas em produção.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Sat, 19 Sep 2026 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 00:00:00 -0300</lastBuildDate>
+    <item>
+      <title>A planilha de pacientes na pasta compartilhada é um problema de LGPD antes de ser um problema de organização</title>
+      <link>https://clariosistemas.com.br/blog/dados-de-paciente-em-planilha-compartilhada/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/dados-de-paciente-em-planilha-compartilhada/</guid>
+      <description>Dado de saúde é dado pessoal sensível na Lei 13.709. O que isso significa na prática para a recepção de uma clínica que controla agenda e prontuário em arquivos compartilhados na rede.</description>
+      <category>Saúde e proteção de dados</category>
+      <pubDate>Fri, 25 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
+    <item>
+      <title>Por que um sistema leve custa menos em nuvem e não trava no computador do funcionário</title>
+      <link>https://clariosistemas.com.br/blog/sistema-leve-custa-menos-em-nuvem/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/sistema-leve-custa-menos-em-nuvem/</guid>
+      <description>A fatura do servidor e a lentidão na recepção têm a mesma causa. Como o peso do software se converte em custo mensal, em máquina nova e em tempo perdido por quem opera o sistema.</description>
+      <category>Infraestrutura e custo</category>
+      <pubDate>Fri, 25 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
+    <item>
+      <title>Visitas domiciliares a idosos: como um município organiza a fila sem comprar licença cara</title>
+      <link>https://clariosistemas.com.br/blog/visitas-domiciliares-sem-licenca-cara/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/visitas-domiciliares-sem-licenca-cara/</guid>
+      <description>Municípios pequenos não perdem o controle das visitas domiciliares por falta de software caro, mas por falta de critério registrado. O que muda quando a fila de atendimento é ordenada por regra explícita.</description>
+      <category>Saúde e gestão pública</category>
+      <pubDate>Tue, 22 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
     <item>
       <title>O que uma empresa de Montes Claros deve avaliar antes de contratar um projeto de inteligência artificial</title>
       <link>https://clariosistemas.com.br/blog/o-que-avaliar-antes-de-contratar-ia-para-sua-empresa/</link>

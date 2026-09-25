@@ -1,7 +1,7 @@
 ---
 title: A planilha de pacientes na pasta compartilhada é um problema de LGPD antes de ser um problema de organização
 slug: dados-de-paciente-em-planilha-compartilhada
-date: 2026-10-06
+date: 2026-09-25
 area: Saúde e proteção de dados
 description: Dado de saúde é dado pessoal sensível na Lei 13.709. O que isso significa na prática para a recepção de uma clínica que controla agenda e prontuário em arquivos compartilhados na rede.
 read_time: 6 min
