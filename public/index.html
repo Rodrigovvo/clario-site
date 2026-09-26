@@ -124,28 +124,119 @@ section{padding:4.5rem 0; border-bottom:1px solid var(--linha)}
   letter-spacing:-.01em; color:var(--titulo)}
 .legenda{color:var(--suave); max-width:46rem; margin:0 0 2.6rem; font-size:1.02rem}
 
-.grade{display:grid; gap:0; grid-template-columns:repeat(4,1fr);
-  border:1px solid var(--linha); border-radius:6px; overflow:hidden;
-  background:var(--superficie)}
-@media (max-width:960px){
-  .grade{grid-template-columns:repeat(2,1fr)}
+.grade{display:grid; gap:1.85rem; grid-template-columns:repeat(2,1fr);
+  background:transparent; border:none; border-radius:0; overflow:visible}
+@media (max-width:860px){
+  .grade{grid-template-columns:1fr; gap:1.5rem}
 }
-@media (max-width:540px){
-  .grade{grid-template-columns:1fr}
-}
-article{padding:1.8rem 1.4rem; border-right:1px solid var(--linha);
-  border-bottom:1px solid var(--linha); position:relative}
-article::before{content:""; position:absolute; left:0; top:0; width:3px;
-  height:100%; background:var(--cor)}
-article .idx{font-family:var(--mono); font-size:.72rem; color:var(--cor-txt);
-  font-weight:600; letter-spacing:.1em}
-article h3{font-family:var(--corpo); font-weight:800; font-size:1.14rem;
-  margin:.55rem 0 .1rem; color:var(--titulo)}
-article .area{font-family:var(--mono); font-size:.68rem; letter-spacing:.12em;
+
+.card-prod{position:relative; background:var(--superficie); border:1px solid var(--linha);
+  border-radius:12px; overflow:hidden; display:flex; flex-direction:column;
+  transition:transform .28s cubic-bezier(.16,1,.3,1), box-shadow .28s ease, border-color .28s ease;
+  box-shadow:0 4px 20px rgba(0,0,0,.03)}
+.card-prod:hover{transform:translateY(-6px); border-color:var(--cor);
+  box-shadow:0 22px 44px -12px var(--sombra-cor, rgba(0,0,0,.2)), 0 0 0 1px var(--cor)}
+.card-prod::before{content:""; position:absolute; left:0; top:0; right:0; height:3px;
+  background:var(--cor); z-index:3}
+.card-prod::after{content:""; position:absolute; inset:0; border-radius:12px;
+  background:radial-gradient(500px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255,255,255,.05), transparent 70%);
+  pointer-events:none; opacity:0; transition:opacity .3s ease; z-index:2}
+.card-prod:hover::after{opacity:1}
+
+/* Topo do card */
+.prod-topo{display:flex; align-items:center; justify-content:space-between;
+  padding:1rem 1.4rem .85rem; border-bottom:1px solid var(--linha); background:var(--fundo)}
+.prod-ident{display:flex; align-items:center; gap:.75rem}
+.prod-ident .idx{font-family:var(--mono); font-size:.8rem; font-weight:700;
+  color:var(--cor-txt); letter-spacing:.08em}
+.prod-ident .area{font-family:var(--mono); font-size:.68rem; letter-spacing:.12em;
   text-transform:uppercase; color:var(--tenue)}
-article p{margin:.85rem 0 0; color:var(--suave); font-size:.94rem; line-height:1.6}
-article .liga{display:inline-block; margin-top:1.1rem; font-family:var(--mono);
-  font-size:.78rem; font-weight:500; letter-spacing:.02em}
+.prod-status{display:inline-flex; align-items:center; gap:.42rem; font-family:var(--mono);
+  font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--suave);
+  padding:.22rem .55rem; border-radius:12px; background:var(--superficie); border:1px solid var(--linha)}
+.prod-status .dot{width:6px; height:6px; border-radius:50%; background:var(--status-cor, var(--verde));
+  box-shadow:0 0 7px var(--status-cor, var(--verde)); animation:pulsar 2.4s infinite ease-in-out}
+@keyframes pulsar{0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.5; transform:scale(.85)}}
+
+/* Janela / Browser Frame */
+.prod-frame{position:relative; background:var(--faixa); border-bottom:1px solid var(--linha);
+  overflow:hidden}
+.prod-frame-bar{display:flex; align-items:center; justify-content:space-between;
+  padding:.45rem .95rem; background:rgba(0,0,0,.06); border-bottom:1px solid var(--linha);
+  font-family:var(--mono); font-size:.66rem; color:var(--tenue)}
+:root[data-theme="dark"] .prod-frame-bar{background:rgba(0,0,0,.22)}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .prod-frame-bar{background:rgba(0,0,0,.22)}
+}
+.frame-dots{display:inline-flex; gap:5px}
+.frame-dots i{width:7px; height:7px; border-radius:50%; background:var(--linha-forte)}
+.frame-url{letter-spacing:.04em; color:var(--tenue); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.frame-hint{font-size:.62rem; color:var(--cor-txt); font-weight:600; opacity:.9}
+
+.prod-midia{position:relative; aspect-ratio:16/9; overflow:hidden; background:#120e0b;
+  cursor:pointer; display:block; border:none; padding:0; width:100%; text-align:left}
+.prod-midia picture, .prod-midia img{width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.card-prod:hover .prod-midia img{transform:scale(1.04)}
+
+.prod-midia-overlay{position:absolute; inset:0; background:rgba(18,14,10,.45);
+  display:flex; align-items:center; justify-content:center; opacity:0;
+  transition:opacity .25s ease; backdrop-filter:blur(2px)}
+.card-prod:hover .prod-midia-overlay, .prod-midia:focus-visible .prod-midia-overlay{opacity:1}
+.btn-zoom{display:inline-flex; align-items:center; gap:.45rem; font-family:var(--mono);
+  font-size:.76rem; font-weight:600; color:#fff; background:rgba(20,16,12,.82);
+  padding:.48rem 1rem; border-radius:20px; border:1px solid rgba(255,255,255,.32);
+  transform:translateY(6px); transition:transform .25s ease; box-shadow:0 8px 20px rgba(0,0,0,.4)}
+.card-prod:hover .btn-zoom{transform:translateY(0)}
+
+/* Corpo do Card */
+.prod-info{padding:1.4rem 1.4rem 1.35rem; display:flex; flex-direction:column; flex:1}
+.prod-info h3{font-family:var(--corpo); font-weight:800; font-size:1.32rem;
+  letter-spacing:-.015em; margin:0 0 .45rem; color:var(--titulo)}
+.prod-info p{margin:0 0 1.15rem; color:var(--suave); font-size:.95rem; line-height:1.62}
+
+/* Tags de diferenciais */
+.prod-tags{display:flex; flex-wrap:wrap; gap:.42rem; margin-top:auto; margin-bottom:1.2rem}
+.prod-tag{font-family:var(--mono); font-size:.67rem; letter-spacing:.03em;
+  color:var(--suave); background:var(--fundo); border:1px solid var(--linha);
+  padding:.22rem .55rem; border-radius:4px}
+
+/* Rodapé / Link de Ação */
+.prod-acao{display:flex; align-items:center; justify-content:space-between;
+  padding-top:.95rem; border-top:1px solid var(--linha); margin-top:auto}
+.prod-liga{display:inline-flex; align-items:center; gap:.45rem; font-family:var(--mono);
+  font-size:.82rem; font-weight:600; letter-spacing:.02em; color:var(--cor-txt);
+  text-decoration:none; transition:color .15s}
+.prod-liga .arrow{display:inline-block; transition:transform .22s ease}
+.prod-liga:hover{color:var(--cor)}
+.prod-liga:hover .arrow{transform:translate(3px, -3px)}
+
+/* ── Lightbox Modal ────────────────────────────────────────── */
+.lightbox{position:fixed; inset:0; z-index:100; background:rgba(18,14,11,.88);
+  backdrop-filter:blur(8px); display:none; align-items:center; justify-content:center;
+  padding:1.5rem; opacity:0; transition:opacity .25s ease}
+.lightbox.ativo{display:flex; opacity:1}
+.lightbox-conteudo{position:relative; max-width:1120px; width:100%; max-height:92vh;
+  display:flex; flex-direction:column; background:var(--superficie); border:1px solid var(--linha);
+  border-radius:12px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.65)}
+.lightbox-barra{display:flex; align-items:center; justify-content:space-between;
+  padding:.75rem 1.25rem; border-bottom:1px solid var(--linha); background:var(--fundo);
+  font-family:var(--mono); font-size:.76rem; color:var(--suave)}
+.lightbox-barra-info{display:flex; align-items:center; gap:.7rem}
+.lightbox-barra-info .dot{width:7px; height:7px; border-radius:50%; background:var(--verde)}
+.lightbox-fechar{background:none; border:none; color:var(--texto); font-size:1.6rem;
+  line-height:1; cursor:pointer; padding:0 .3rem; border-radius:4px; transition:color .15s}
+.lightbox-fechar:hover{color:var(--marca)}
+.lightbox-img-wrap{max-height:calc(92vh - 130px); overflow:auto; background:#120e0b;
+  display:flex; align-items:center; justify-content:center}
+.lightbox-img-wrap img{max-width:100%; max-height:100%; object-fit:contain; display:block}
+.lightbox-legenda{padding:.85rem 1.25rem; font-size:.9rem; color:var(--suave);
+  border-top:1px solid var(--linha); background:var(--superficie);
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.8rem}
+.lightbox-link{display:inline-flex; align-items:center; gap:.4rem; font-family:var(--mono);
+  font-size:.8rem; font-weight:600; color:var(--link); text-decoration:none}
+.lightbox-link:hover{text-decoration:underline}
+
 
 /* ── Sob encomenda ────────────────────────────────────────── */
 .encomenda{margin-top:1.3rem; border:1px solid var(--linha); border-radius:6px;
@@ -228,7 +319,7 @@ footer{padding:2.4rem 0 3.4rem; color:var(--tenue); font-size:.82rem;
       "knowsLanguage": "pt-BR",
       "sameAs": [
         "https://personalchess.com",
-        "https://clarioconcursos.com.br",
+        "https://lembro.app.br",
         "https://www.prikland.com.br"
       ],
       "contactPoint": {
@@ -248,7 +339,7 @@ footer{padding:2.4rem 0 3.4rem; color:var(--tenue); font-size:.82rem;
           {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Integrações e tratamento de dados", "description": "Integração entre sistemas, migração de planilhas para banco relacional e automação de rotinas manuais."}},
           {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Consultoria técnica em tecnologia", "description": "Diagnóstico de gargalos operacionais, arquitetura e revisão de custo de infraestrutura."}},
           {"@type": "Offer", "itemOffered": {"@type": "SoftwareApplication", "name": "Amparo", "applicationCategory": "HealthApplication", "operatingSystem": "Navegador web", "description": "Apoio à gestão de visitas domiciliares: registra informações autodeclaradas pela pessoa idosa e ordena a fila de atendimento conforme critérios definidos pelo município."}},
-          {"@type": "Offer", "itemOffered": {"@type": "SoftwareApplication", "name": "Clariô Concursos", "applicationCategory": "EducationalApplication", "operatingSystem": "Navegador web", "url": "https://clarioconcursos.com.br", "description": "Plataforma de preparação para concursos públicos, com organização de estudo e acompanhamento de desempenho ao longo do edital."}},
+          {"@type": "Offer", "itemOffered": {"@type": "SoftwareApplication", "name": "Lembrô", "applicationCategory": "UtilityApplication", "operatingSystem": "Navegador web, Telegram, WhatsApp", "url": "https://lembro.app.br", "description": "Os prazos da sua casa, sem você precisar lembrar: IPVA, seguro, aluguel, garantia, exames e vacinas com aviso na hora certa no Telegram e WhatsApp."}},
           {"@type": "Offer", "itemOffered": {"@type": "SoftwareApplication", "name": "PersonalChess", "applicationCategory": "GameApplication", "operatingSystem": "Navegador web", "url": "https://personalchess.com", "description": "Treinamento personalizado de xadrez com análise de partidas e plano de estudo individual."}}
         ]
       }
@@ -329,40 +420,204 @@ footer{padding:2.4rem 0 3.4rem; color:var(--tenue); font-size:.82rem;
       </p>
 
       <div class="grade">
-        <article style="--cor:var(--azul); --cor-txt:var(--azul-txt)">
-          <div class="idx">01</div>
-          <h3>PersonalChess</h3>
-          <div class="area">Xadrez</div>
-          <p>Treinamento personalizado com análise de partidas e plano de estudo
-             individual, adaptado ao nível de cada jogador.</p>
-          <a class="liga" href="https://personalchess.com">personalchess.com&nbsp;↗</a>
+        <!-- 01 PersonalChess -->
+        <article class="card-prod" style="--cor:var(--azul); --cor-txt:var(--azul-txt); --sombra-cor:rgba(63,110,140,.22)">
+          <div class="prod-topo">
+            <div class="prod-ident">
+              <span class="idx">01</span>
+              <span class="area">Xadrez &amp; IA</span>
+            </div>
+            <div class="prod-status">
+              <span class="dot" style="--status-cor:var(--verde)"></span>
+              <span>No ar</span>
+            </div>
+          </div>
+          <div class="prod-frame">
+            <div class="prod-frame-bar">
+              <span class="frame-dots"><i></i><i></i><i></i></span>
+              <span class="frame-url">personalchess.com</span>
+              <span class="frame-hint">preview</span>
+            </div>
+            <button class="prod-midia" type="button" aria-label="Ampliar preview do PersonalChess"
+                    data-preview-src="/produtos/personalchess.png"
+                    data-preview-title="PersonalChess: Treinamento Inteligente com Stockfish 18 e IA"
+                    data-preview-desc="Análise tática de partidas, tabuleiro interativo, avaliação por Stockfish nativo e identificação de vícios recorrentes."
+                    data-preview-url="https://personalchess.com">
+              <picture>
+                <source srcset="/produtos/personalchess.webp" type="image/webp">
+                <img src="/produtos/personalchess.png" alt="Interface do PersonalChess com análise de partidas e tabuleiro de xadrez" width="1600" height="900" loading="lazy">
+              </picture>
+              <span class="prod-midia-overlay">
+                <span class="btn-zoom">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                  Ver captura ampliada
+                </span>
+              </span>
+            </button>
+          </div>
+          <div class="prod-info">
+            <h3>PersonalChess</h3>
+            <p>Treinamento personalizado de xadrez com análise profunda via motor Stockfish 18 nativo e inteligência artificial. Importação automática de partidas do Chess.com e Lichess, detecção de vícios recorrentes, Chess DNA e exercícios sob medida.</p>
+            <div class="prod-tags">
+              <span class="prod-tag">Stockfish 18 Nativo</span>
+              <span class="prod-tag">Chess DNA</span>
+              <span class="prod-tag">Dossiê de Oponente</span>
+              <span class="prod-tag">Análise com IA</span>
+            </div>
+            <div class="prod-acao">
+              <a class="prod-liga" href="https://personalchess.com" target="_blank" rel="noopener">personalchess.com <span class="arrow">↗</span></a>
+            </div>
+          </div>
         </article>
 
-        <article style="--cor:var(--verde); --cor-txt:var(--verde-txt)">
-          <div class="idx">02</div>
-          <h3>Clariô Concursos</h3>
-          <div class="area">Educação</div>
-          <p>Plataforma de preparação para concursos públicos, com organização de
-             estudo e acompanhamento de desempenho ao longo do edital.</p>
-          <a class="liga" href="https://clarioconcursos.com.br">clarioconcursos.com.br&nbsp;↗</a>
+        <!-- 02 Lembrô -->
+        <article class="card-prod" style="--cor:var(--ouro); --cor-txt:var(--ouro-txt); --sombra-cor:rgba(227,162,43,.22)">
+          <div class="prod-topo">
+            <div class="prod-ident">
+              <span class="idx">02</span>
+              <span class="area">Gestão Pessoal &amp; Prazos</span>
+            </div>
+            <div class="prod-status">
+              <span class="dot" style="--status-cor:var(--verde)"></span>
+              <span>No ar</span>
+            </div>
+          </div>
+          <div class="prod-frame">
+            <div class="prod-frame-bar">
+              <span class="frame-dots"><i></i><i></i><i></i></span>
+              <span class="frame-url">lembro.app.br</span>
+              <span class="frame-hint">preview</span>
+            </div>
+            <button class="prod-midia" type="button" aria-label="Ampliar preview do Lembrô"
+                    data-preview-src="/produtos/lembro.png"
+                    data-preview-title="Lembrô: Os prazos da sua casa, sem você precisar lembrar"
+                    data-preview-desc="Assistente de prazos da casa no Telegram e WhatsApp com leitura de documentos via IA, folhinha de vencimentos e alertas preventivos."
+                    data-preview-url="https://lembro.app.br/">
+              <picture>
+                <source srcset="/produtos/lembro.webp" type="image/webp">
+                <img src="/produtos/lembro.png" alt="Interface do Lembrô com folhinha de vencimentos e lembretes inteligentes via Telegram e WhatsApp" width="1600" height="900" loading="lazy">
+              </picture>
+              <span class="prod-midia-overlay">
+                <span class="btn-zoom">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                  Ver captura ampliada
+                </span>
+              </span>
+            </button>
+          </div>
+          <div class="prod-info">
+            <h3>Lembrô</h3>
+            <p>Os prazos da sua casa, sem você precisar lembrar. Mande a foto do documento pelo Telegram ou WhatsApp (IPVA, seguro, aluguel, garantia, exames, vacinas dos pets) e o Lembrô avisa na hora certa, com antecedência e o caminho oficial para resolver.</p>
+            <div class="prod-tags">
+              <span class="prod-tag">Telegram &amp; WhatsApp</span>
+              <span class="prod-tag">OCR de Documentos</span>
+              <span class="prod-tag">Gestão da Casa</span>
+              <span class="prod-tag">Zero Burocracia</span>
+            </div>
+            <div class="prod-acao">
+              <a class="prod-liga" href="https://lembro.app.br/" target="_blank" rel="noopener">lembro.app.br <span class="arrow">↗</span></a>
+            </div>
+          </div>
         </article>
 
-        <article style="--cor:var(--rosa); --cor-txt:var(--rosa-txt)">
-          <div class="idx">03</div>
-          <h3>Amparo</h3>
-          <div class="area">Saúde e gestão</div>
-          <p>Apoio à gestão de visitas domiciliares: registra informações
-             autodeclaradas pela pessoa idosa e ordena a fila de atendimento
-             conforme critérios definidos pelo município.</p>
+        <!-- 03 Amparo -->
+        <article class="card-prod" style="--cor:var(--rosa); --cor-txt:var(--rosa-txt); --sombra-cor:rgba(197,111,127,.22)">
+          <div class="prod-topo">
+            <div class="prod-ident">
+              <span class="idx">03</span>
+              <span class="area">Saúde Pública &amp; Gestão</span>
+            </div>
+            <div class="prod-status">
+              <span class="dot" style="--status-cor:var(--ouro)"></span>
+              <span>Piloto municipal</span>
+            </div>
+          </div>
+          <div class="prod-frame">
+            <div class="prod-frame-bar">
+              <span class="frame-dots"><i></i><i></i><i></i></span>
+              <span class="frame-url">amparo · gestão municipal</span>
+              <span class="frame-hint">preview</span>
+            </div>
+            <button class="prod-midia" type="button" aria-label="Ampliar preview do Amparo"
+                    data-preview-src="/produtos/amparo.png"
+                    data-preview-title="Amparo: Acompanhamento Ativo da Pessoa Idosa"
+                    data-preview-desc="Painel de ordenação da fila de visitas domiciliares por escore de vulnerabilidade administrativa para equipes de atenção primária (ESF)."
+                    data-preview-url="#contato">
+              <picture>
+                <source srcset="/produtos/amparo.webp" type="image/webp">
+                <img src="/produtos/amparo.png" alt="Painel do Amparo com ordenação da fila de visitas domiciliares à pessoa idosa e indicadores de saúde" width="1600" height="900" loading="lazy">
+              </picture>
+              <span class="prod-midia-overlay">
+                <span class="btn-zoom">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                  Ver captura ampliada
+                </span>
+              </span>
+            </button>
+          </div>
+          <div class="prod-info">
+            <h3>Amparo</h3>
+            <p>Apoio à gestão de visitas domiciliares e atenção básica à saúde da pessoa idosa. Acompanhamento ativo remoto por voz e WhatsApp que converte relatos autodeclarados em fila ordenada por escore de vulnerabilidade para os agentes de saúde (ACS).</p>
+            <div class="prod-tags">
+              <span class="prod-tag">Atenção Primária (APS)</span>
+              <span class="prod-tag">Fila por Vulnerabilidade</span>
+              <span class="prod-tag">Transcrição de Voz</span>
+              <span class="prod-tag">PWA Offline</span>
+            </div>
+            <div class="prod-acao">
+              <a class="prod-liga" href="#contato">Apresentação técnica <span class="arrow">→</span></a>
+            </div>
+          </div>
         </article>
 
-        <article style="--cor:var(--vermelho); --cor-txt:var(--vermelho-txt)">
-          <div class="idx">04</div>
-          <h3>Pri.Kland</h3>
-          <div class="area">Entretenimento</div>
-          <p>Portal da criadora Priscila Alkimim sobre K-dramas e entretenimento
-             asiático, com artigos, dados de audiência e parcerias com marcas.</p>
-          <a class="liga" href="https://www.prikland.com.br">prikland.com.br&nbsp;↗</a>
+        <!-- 04 Pri.Kland -->
+        <article class="card-prod" style="--cor:var(--vermelho); --cor-txt:var(--vermelho-txt); --sombra-cor:rgba(169,59,48,.22)">
+          <div class="prod-topo">
+            <div class="prod-ident">
+              <span class="idx">04</span>
+              <span class="area">Entretenimento &amp; Mídia</span>
+            </div>
+            <div class="prod-status">
+              <span class="dot" style="--status-cor:var(--verde)"></span>
+              <span>No ar</span>
+            </div>
+          </div>
+          <div class="prod-frame">
+            <div class="prod-frame-bar">
+              <span class="frame-dots"><i></i><i></i><i></i></span>
+              <span class="frame-url">prikland.com.br</span>
+              <span class="frame-hint">preview</span>
+            </div>
+            <button class="prod-midia" type="button" aria-label="Ampliar preview do Pri.Kland"
+                    data-preview-src="/produtos/prikland.png"
+                    data-preview-title="Pri.Kland: Portal de K-Dramas e Entretenimento Asiático"
+                    data-preview-desc="Portal da criadora Priscila Alkimim com análises editoriais, métricas de streaming e mídia kit para campanhas."
+                    data-preview-url="https://www.prikland.com.br">
+              <picture>
+                <source srcset="/produtos/prikland.webp" type="image/webp">
+                <img src="/produtos/prikland.png" alt="Portal Pri.Kland sobre K-dramas, doramas e cultura asiática por Priscila Alkimim" width="1600" height="900" loading="lazy">
+              </picture>
+              <span class="prod-midia-overlay">
+                <span class="btn-zoom">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                  Ver captura ampliada
+                </span>
+              </span>
+            </button>
+          </div>
+          <div class="prod-info">
+            <h3>Pri.Kland</h3>
+            <p>Portal da criadora Priscila Alkimim sobre K-dramas, doramas e entretenimento asiático para o público brasileiro. Conteúdo especializado com resenhas, análises de produções, métricas de audiência de streaming e parcerias com marcas globais.</p>
+            <div class="prod-tags">
+              <span class="prod-tag">K-Dramas &amp; Séries</span>
+              <span class="prod-tag">Mídia Kit Oficial</span>
+              <span class="prod-tag">Dados de Audiência</span>
+              <span class="prod-tag">Parcerias</span>
+            </div>
+            <div class="prod-acao">
+              <a class="prod-liga" href="https://www.prikland.com.br" target="_blank" rel="noopener">prikland.com.br <span class="arrow">↗</span></a>
+            </div>
+          </div>
         </article>
       </div>
 
@@ -435,6 +690,26 @@ footer{padding:2.4rem 0 3.4rem; color:var(--tenue); font-size:.82rem;
   </div>
 </footer>
 
+<!-- Lightbox para visualização ampliada das capturas -->
+<div id="lightbox-modal" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="lightbox-title">
+  <div class="lightbox-conteudo">
+    <div class="lightbox-barra">
+      <div class="lightbox-barra-info">
+        <span class="dot"></span>
+        <span id="lightbox-title" style="font-weight:700; color:var(--titulo)">Captura do sistema</span>
+      </div>
+      <button id="lightbox-fechar" class="lightbox-fechar" type="button" aria-label="Fechar visualização">×</button>
+    </div>
+    <div class="lightbox-img-wrap">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+    <div class="lightbox-legenda">
+      <span id="lightbox-desc"></span>
+      <a id="lightbox-link" class="lightbox-link" href="#" target="_blank" rel="noopener"></a>
+    </div>
+  </div>
+</div>
+
 <script>
 document.getElementById('ano').textContent = new Date().getFullYear();
 
@@ -465,6 +740,74 @@ if (ticks) {
     raios.appendChild(l);
   }
 }
+
+// Interatividade: Lightbox Modal para capturas dos sistemas
+const lightbox = document.getElementById('lightbox-modal');
+const lbImg = document.getElementById('lightbox-img');
+const lbTitle = document.getElementById('lightbox-title');
+const lbDesc = document.getElementById('lightbox-desc');
+const lbLink = document.getElementById('lightbox-link');
+const lbClose = document.getElementById('lightbox-fechar');
+
+function abrirLightbox(src, title, desc, url) {
+  if (!lightbox) return;
+  lbImg.src = src;
+  lbImg.alt = title;
+  lbTitle.textContent = title;
+  lbDesc.textContent = desc || '';
+  if (url && url !== '#contato') {
+    lbLink.href = url;
+    lbLink.textContent = 'Acessar sistema oficial ↗';
+    lbLink.style.display = 'inline-flex';
+  } else if (url === '#contato') {
+    lbLink.href = '#contato';
+    lbLink.textContent = 'Solicitar apresentação técnica →';
+    lbLink.style.display = 'inline-flex';
+  } else {
+    lbLink.style.display = 'none';
+  }
+  lightbox.classList.add('ativo');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharLightbox() {
+  if (!lightbox) return;
+  lightbox.classList.remove('ativo');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+if (lbClose) lbClose.addEventListener('click', fecharLightbox);
+if (lightbox) {
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) fecharLightbox();
+  });
+}
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox && lightbox.classList.contains('ativo')) {
+    fecharLightbox();
+  }
+});
+
+document.querySelectorAll('.prod-midia').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const src = btn.dataset.previewSrc;
+    const title = btn.dataset.previewTitle;
+    const desc = btn.dataset.previewDesc;
+    const url = btn.dataset.previewUrl;
+    abrirLightbox(src, title, desc, url);
+  });
+});
+
+// Efeito spotlight dinâmico nos cards que segue o cursor
+document.querySelectorAll('.card-prod').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+  });
+});
 </script>
 </body>
 </html>
