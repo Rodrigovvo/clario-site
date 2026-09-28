@@ -57,7 +57,7 @@ SHARED_HEAD = """
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/marca/catope.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<script defer src="https://cloud.umami.is/script.js" data-website-id="7dbc2ed6-92e3-4324-8a5d-e9a11250e975"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="7dbc2ed6-92e3-4324-8a5d-e9a11250e975" data-domains="clariosistemas.com.br,www.clariosistemas.com.br"></script>
 <link rel="preload" href="/fonts/baloo2-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -149,6 +149,41 @@ nav a:hover, nav a.ativo{color:var(--marca)}
 .card-artigo h2 a:hover{color:var(--marca)}
 .card-artigo p{margin:0 0 1.2rem; color:var(--suave); font-size:.95rem; line-height:1.55}
 .card-artigo .ler{font-family:var(--mono); font-size:.78rem; font-weight:600; color:var(--link); text-decoration:none}
+
+/* Ferramentas do Blog: Pesquisa e Paginacao */
+.ferramentas-blog{margin-bottom:2.2rem; display:flex; flex-direction:column; gap:.8rem}
+.busca-container{position:relative; width:100%}
+.campo-busca{width:100%; padding:.85rem 1.1rem; padding-right:2.8rem;
+  font-family:var(--corpo); font-size:1rem; color:var(--texto);
+  background:var(--superficie); border:1px solid var(--linha-forte);
+  border-radius:6px; outline:none; transition:border-color .15s ease, box-shadow .15s ease}
+.campo-busca:focus{border-color:var(--marca); box-shadow:0 0 0 3px rgba(169, 59, 48, .12)}
+.btn-limpar-busca{position:absolute; right:.75rem; top:50%; transform:translateY(-50%);
+  background:none; border:none; font-size:1.3rem; color:var(--tenue); cursor:pointer;
+  padding:.2rem .5rem; line-height:1; border-radius:4px}
+.btn-limpar-busca:hover{color:var(--marca)}
+.info-busca{display:flex; align-items:center; justify-content:space-between;
+  font-family:var(--mono); font-size:.74rem; color:var(--tenue); letter-spacing:.04em}
+.busca-vazia{text-align:center; padding:3.5rem 1.5rem; background:var(--superficie);
+  border:1px dashed var(--linha-forte); border-radius:6px; margin:1rem 0 2rem}
+.busca-vazia-titulo{font-family:var(--corpo); font-weight:800; font-size:1.2rem;
+  color:var(--titulo); margin:0 0 .4rem}
+.busca-vazia-sub{color:var(--suave); font-size:.95rem; margin:0}
+.paginacao{display:flex; justify-content:center; align-items:center; gap:.4rem;
+  margin-top:2.8rem; flex-wrap:wrap; font-family:var(--mono); font-size:.82rem}
+.pag-btn{background:var(--superficie); border:1px solid var(--linha); color:var(--texto);
+  padding:.5rem .95rem; border-radius:4px; cursor:pointer; font-family:var(--mono);
+  font-size:.8rem; font-weight:600; text-decoration:none; transition:all .15s ease}
+.pag-btn:hover:not(:disabled){border-color:var(--marca); color:var(--marca)}
+.pag-btn:disabled{opacity:.35; cursor:not-allowed; border-color:var(--linha)}
+.pag-numeros{display:flex; gap:.35rem; align-items:center}
+.pag-num{background:var(--superficie); border:1px solid var(--linha); color:var(--texto);
+  min-width:2.2rem; height:2.2rem; padding:0 .4rem; display:inline-flex; align-items:center;
+  justify-content:center; border-radius:4px; cursor:pointer; font-family:var(--mono);
+  font-size:.8rem; font-weight:600; text-decoration:none; transition:all .15s ease}
+.pag-num:hover:not(.ativo){border-color:var(--marca); color:var(--marca)}
+.pag-num.ativo{background:var(--marca); color:#fff; border-color:var(--marca); font-weight:700}
+.pag-elipse{color:var(--tenue); padding:0 .2rem}
 
 /* Cabecalho Compacto do Artigo Individual */
 .artigo-cabecalho{padding:1.5rem 0 1.2rem; border-bottom:1px solid var(--linha)}
@@ -384,6 +419,9 @@ def render_blog_index(published_posts):
     canonical_url = f"{SITE_URL}/blog/"
     cards_html = []
     
+    def limpa_attr(s):
+        return str(s).replace("&", "&amp;").replace('"', "&quot;").replace("<", "&lt;").replace(">", "&gt;")
+
     for idx, p in enumerate(published_posts):
         m = p["meta"]
         title = m.get("title", "Sem título")
@@ -395,7 +433,7 @@ def render_blog_index(published_posts):
         cor, cor_txt = CORES_CATEGORIA[idx % len(CORES_CATEGORIA)]
         
         card = f"""
-        <article class="card-artigo" style="--cor:{cor}; --cor-txt:{cor_txt}">
+        <article class="card-artigo" style="--cor:{cor}; --cor-txt:{cor_txt}" data-titulo="{limpa_attr(title)}" data-categoria="{limpa_attr(area)}" data-descricao="{limpa_attr(desc)}">
           <div>
             <div class="meta">
               <span class="categoria">{area}</span>
@@ -483,14 +521,217 @@ def render_blog_index(published_posts):
 
   <section class="secao-artigos">
     <div class="env">
-      <div class="grade-artigos">
+      <div class="ferramentas-blog">
+        <div class="busca-container">
+          <input type="text" id="campo-busca" class="campo-busca" placeholder="Buscar artigos por título, tema ou tecnologia..." autocomplete="off" spellcheck="false" aria-label="Buscar artigos no blog">
+          <button type="button" id="btn-limpar-busca" class="btn-limpar-busca" aria-label="Limpar busca" style="display:none">&times;</button>
+        </div>
+        <div class="info-busca">
+          <span id="contador-busca">Carregando artigos...</span>
+          <span class="dica-busca">Filtro instantâneo</span>
+        </div>
+      </div>
+
+      <div id="busca-vazia" class="busca-vazia" style="display:none">
+        <p class="busca-vazia-titulo">Nenhum artigo encontrado</p>
+        <p class="busca-vazia-sub">Tente outros termos ou limpe a busca para ver todas as publicações.</p>
+      </div>
+
+      <div class="grade-artigos" id="grade-artigos">
         {cards_str}
       </div>
+
+      <nav class="paginacao" id="paginacao" aria-label="Paginação de artigos" style="display:none">
+        <button type="button" class="pag-btn" id="pag-ant" aria-label="Página anterior">&larr; Anterior</button>
+        <div class="pag-numeros" id="pag-numeros"></div>
+        <button type="button" class="pag-btn" id="pag-prox" aria-label="Próxima página">Próxima &rarr;</button>
+      </nav>
     </div>
   </section>
 </main>
 
 {FOOTER_HTML}
+
+<script>
+(function() {{
+  var ITENS_POR_PAGINA = 6;
+  var campoBusca = document.getElementById('campo-busca');
+  var btnLimpar = document.getElementById('btn-limpar-busca');
+  var contador = document.getElementById('contador-busca');
+  var buscaVazia = document.getElementById('busca-vazia');
+  var grade = document.getElementById('grade-artigos');
+  var paginacao = document.getElementById('paginacao');
+  var pagAnt = document.getElementById('pag-ant');
+  var pagProx = document.getElementById('pag-prox');
+  var pagNumeros = document.getElementById('pag-numeros');
+
+  if (!grade) return;
+  var cards = Array.prototype.slice.call(grade.querySelectorAll('.card-artigo'));
+  if (!cards.length) return;
+
+  function normalizar(s) {{
+    return (s || '').toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '');
+  }}
+
+  var dadosCards = cards.map(function(card) {{
+    var t = normalizar(card.getAttribute('data-titulo') || '');
+    var c = normalizar(card.getAttribute('data-categoria') || '');
+    var d = normalizar(card.getAttribute('data-descricao') || '');
+    return {{
+      el: card,
+      textoBusca: t + ' ' + c + ' ' + d
+    }};
+  }});
+
+  var cardsFiltrados = dadosCards.slice();
+  var paginaAtual = 1;
+
+  function obterParams() {{
+    var p = new URLSearchParams(window.location.search);
+    return {{
+      q: p.get('q') || '',
+      p: parseInt(p.get('p'), 10) || 1
+    }};
+  }}
+
+  function atualizarURL(q, pag) {{
+    var p = new URLSearchParams();
+    if (q) p.set('q', q);
+    if (pag > 1) p.set('p', pag);
+    var qs = p.toString();
+    var novaUrl = window.location.pathname + (qs ? '?' + qs : '');
+    window.history.replaceState(null, '', novaUrl);
+  }}
+
+  function renderizar() {{
+    var totalItens = cardsFiltrados.length;
+    var totalPaginas = Math.ceil(totalItens / ITENS_POR_PAGINA) || 1;
+    if (paginaAtual > totalPaginas) paginaAtual = totalPaginas;
+    if (paginaAtual < 1) paginaAtual = 1;
+
+    var termo = campoBusca.value.trim();
+    if (termo) {{
+      contador.textContent = totalItens === 1 ? '1 artigo encontrado' : totalItens + ' artigos encontrados';
+      btnLimpar.style.display = 'block';
+    }} else {{
+      contador.textContent = totalItens + ' artigos publicados';
+      btnLimpar.style.display = 'none';
+    }}
+
+    if (totalItens === 0) {{
+      buscaVazia.style.display = 'block';
+      grade.style.display = 'none';
+      paginacao.style.display = 'none';
+      atualizarURL(termo, 1);
+      return;
+    }}
+
+    buscaVazia.style.display = 'none';
+    grade.style.display = 'grid';
+
+    var inicio = (paginaAtual - 1) * ITENS_POR_PAGINA;
+    var fim = inicio + ITENS_POR_PAGINA;
+
+    dadosCards.forEach(function(item) {{
+      item.el.style.display = 'none';
+    }});
+
+    cardsFiltrados.slice(inicio, fim).forEach(function(item) {{
+      item.el.style.display = 'flex';
+    }});
+
+    if (totalPaginas <= 1) {{
+      paginacao.style.display = 'none';
+    }} else {{
+      paginacao.style.display = 'flex';
+      pagAnt.disabled = (paginaAtual === 1);
+      pagProx.disabled = (paginaAtual === totalPaginas);
+
+      pagNumeros.innerHTML = '';
+      for (var i = 1; i <= totalPaginas; i++) {{
+        (function(num) {{
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'pag-num' + (num === paginaAtual ? ' ativo' : '');
+          btn.textContent = num;
+          btn.setAttribute('aria-label', 'Ir para a página ' + num);
+          btn.addEventListener('click', function() {{
+            irParaPagina(num);
+          }});
+          pagNumeros.appendChild(btn);
+        }})(i);
+      }}
+    }}
+
+    atualizarURL(termo, paginaAtual);
+  }}
+
+  function irParaPagina(pag) {{
+    paginaAtual = pag;
+    renderizar();
+    var secao = document.querySelector('.secao-artigos');
+    if (secao) {{
+      secao.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+    }}
+  }}
+
+  function filtrar(termo) {{
+    var normal = normalizar(termo);
+    var tokens = normal.split(/\\s+/).filter(Boolean);
+    if (!tokens.length) {{
+      cardsFiltrados = dadosCards.slice();
+    }} else {{
+      cardsFiltrados = dadosCards.filter(function(item) {{
+        return tokens.every(function(t) {{
+          return item.textoBusca.indexOf(t) !== -1;
+        }});
+      }});
+    }}
+    paginaAtual = 1;
+    renderizar();
+  }}
+
+  var debounceTimer = null;
+  campoBusca.addEventListener('input', function() {{
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function() {{
+      filtrar(campoBusca.value);
+    }}, 100);
+  }});
+
+  campoBusca.addEventListener('keydown', function(e) {{
+    if (e.key === 'Escape') {{
+      campoBusca.value = '';
+      filtrar('');
+    }}
+  }});
+
+  btnLimpar.addEventListener('click', function() {{
+    campoBusca.value = '';
+    campoBusca.focus();
+    filtrar('');
+  }});
+
+  pagAnt.addEventListener('click', function() {{
+    if (paginaAtual > 1) irParaPagina(paginaAtual - 1);
+  }});
+
+  pagProx.addEventListener('click', function() {{
+    var totalPaginas = Math.ceil(cardsFiltrados.length / ITENS_POR_PAGINA);
+    if (paginaAtual < totalPaginas) irParaPagina(paginaAtual + 1);
+  }});
+
+  var inicial = obterParams();
+  if (inicial.q) {{
+    campoBusca.value = inicial.q;
+    filtrar(inicial.q);
+  }}
+  if (inicial.p && inicial.p > 1) {{
+    paginaAtual = inicial.p;
+  }}
+  renderizar();
+}})();
+</script>
 </body>
 </html>
 """
