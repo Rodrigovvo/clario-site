@@ -6,7 +6,15 @@
     <atom:link href="https://clariosistemas.com.br/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Engenharia de software, arquitetura web e a rotina real de colocar sistemas em produção.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Fri, 25 Sep 2026 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 00:00:00 -0300</lastBuildDate>
+    <item>
+      <title>Quando trocar o sistema legado que a empresa já paga há sete anos</title>
+      <link>https://clariosistemas.com.br/blog/quando-trocar-sistema-legado/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/quando-trocar-sistema-legado/</guid>
+      <description>Critérios objetivos de decisão, custo real de migração e o que exigir do fornecedor atual antes de rescindir o contrato. O sinal de que o software virou passivo operacional.</description>
+      <category>Sistemas sob encomenda</category>
+      <pubDate>Tue, 29 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
     <item>
       <title>A planilha de pacientes na pasta compartilhada é um problema de LGPD antes de ser um problema de organização</title>
       <link>https://clariosistemas.com.br/blog/dados-de-paciente-em-planilha-compartilhada/</link>

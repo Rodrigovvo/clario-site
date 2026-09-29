@@ -359,7 +359,11 @@ def render_article_page(post, meta, html_body):
 <meta property="article:section" content="{area}">
 <meta property="og:site_name" content="Clariô Sistemas Inteligentes">
 <meta property="og:locale" content="pt_BR">
-<meta property="og:image" content="{SITE_URL}/apple-touch-icon.png">
+<meta property="og:image" content="{SITE_URL}/marca/compartilhamento.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{SITE_URL}/marca/compartilhamento.png">
 <meta name="author" content="Clariô Sistemas Inteligentes">
 <link rel="alternate" type="application/rss+xml" title="Blog da Clariô" href="{SITE_URL}/blog/feed.xml">
 {SHARED_HEAD}
@@ -498,7 +502,11 @@ def render_blog_index(published_posts):
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Clariô Sistemas Inteligentes">
 <meta property="og:locale" content="pt_BR">
-<meta property="og:image" content="{SITE_URL}/apple-touch-icon.png">
+<meta property="og:image" content="{SITE_URL}/marca/compartilhamento.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{SITE_URL}/marca/compartilhamento.png">
 <link rel="alternate" type="application/rss+xml" title="Blog da Clariô" href="{SITE_URL}/blog/feed.xml">
 {SHARED_HEAD}
 <script type="application/ld+json">

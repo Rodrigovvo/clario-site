@@ -119,7 +119,8 @@ required_files = [
     "public/_headers",
     "public/fonts/baloo2-latin.woff2",
     "public/fonts/nunito-latin.woff2",
-    "public/fonts/jetbrainsmono-latin.woff2"
+    "public/fonts/jetbrainsmono-latin.woff2",
+    "public/marca/compartilhamento.png"
 ]
 for rf in required_files:
     if not os.path.isfile(rf):
