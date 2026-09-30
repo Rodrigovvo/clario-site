@@ -6,7 +6,15 @@
     <atom:link href="https://clariosistemas.com.br/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Engenharia de software, arquitetura web e a rotina real de colocar sistemas em produção.</description>
     <language>pt-BR</language>
-    <lastBuildDate>Tue, 29 Sep 2026 00:00:00 -0300</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2026 00:00:00 -0300</lastBuildDate>
+    <item>
+      <title>Quanto custa desenvolver um software sob medida: o que compõe o preço e como evitar orçamentos inflados</title>
+      <link>https://clariosistemas.com.br/blog/quanto-custa-desenvolver-software-sob-medida/</link>
+      <guid isPermaLink="true">https://clariosistemas.com.br/blog/quanto-custa-desenvolver-software-sob-medida/</guid>
+      <description>Da armadilha do valor por hora ao dimensionamento correto do escopo. O que encarece o projeto, o que barateia a entrega e como calcular o custo real de propriedade de um sistema próprio.</description>
+      <category>Sistemas sob encomenda</category>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 -0300</pubDate>
+    </item>
     <item>
       <title>Quando trocar o sistema legado que a empresa já paga há sete anos</title>
       <link>https://clariosistemas.com.br/blog/quando-trocar-sistema-legado/</link>
